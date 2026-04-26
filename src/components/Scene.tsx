@@ -61,6 +61,8 @@ function CameraRig() {
     sOff.current = THREE.MathUtils.lerp(sOff.current, scroll.offset, 0.035);
     sMx.current = THREE.MathUtils.lerp(sMx.current, store.mouseX, 0.04);
     sMy.current = THREE.MathUtils.lerp(sMy.current, store.mouseY, 0.04);
+    /* Expose scroll progress to outside React for sticky CTA visibility */
+    store.scrollProgress = scroll.offset;
     const c = interpCamera(sOff.current);
     const p = Math.max(0.2, 1 - c.pz / 26);
     camera.position.set(c.px + sMx.current * 0.8 * p, c.py + sMy.current * 0.4 * p, c.pz);

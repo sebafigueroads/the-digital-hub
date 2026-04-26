@@ -416,7 +416,7 @@ body.hub-page {
   transition: color 0.4s;
 }
 
-/* ── Sticky persistent portfolio CTA ─────────────── */
+/* ── Sticky persistent portfolio CTA — appears after 70% scroll ─── */
 .sticky-portfolio-cta {
   position: fixed;
   bottom: 28px;
@@ -437,10 +437,20 @@ body.hub-page {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   cursor: none;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.5s ease,
               border-color 0.4s, box-shadow 0.4s, padding 0.4s;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5),
               0 0 22px rgba(200, 255, 0, 0.18);
+  /* Hidden by default; appears on .is-visible */
+  opacity: 0;
+  transform: translateY(40px) scale(0.85);
+  pointer-events: none;
+}
+.sticky-portfolio-cta.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
   animation: stickyPulse 3.4s ease-in-out infinite;
 }
 @media (max-width: 600px) {
