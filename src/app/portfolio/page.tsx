@@ -28,19 +28,19 @@ function FloatingAtoms() {
       baseR: number;
       vx: number; vy: number;
       phase: number; speed: number;
-      deform: number; // how much the shape wobbles
+      deform: number;
       rotSpeed: number;
       color: string;
+      hover: number; // 0..1 hover intensity for visual response
     }
 
-    // Digitals brand palette — cyan, lime, violet, gold, passion
     const palette = [
-      "rgba(18,128,155,",   // cyan #12809b
-      "rgba(0,212,255,",    // bright cyan
-      "rgba(200,255,0,",    // lime accent #c8ff00
-      "rgba(229,187,85,",   // gold #e5bb55
-      "rgba(139,92,246,",   // violet #8b5cf6
-      "rgba(219,102,106,",  // passion red #db666a
+      "rgba(18,128,155,",
+      "rgba(0,212,255,",
+      "rgba(200,255,0,",
+      "rgba(229,187,85,",
+      "rgba(139,92,246,",
+      "rgba(219,102,106,",
     ];
 
     const atoms: Atom[] = [];
@@ -56,8 +56,48 @@ function FloatingAtoms() {
         deform: Math.random() * 0.4 + 0.2,
         rotSpeed: (Math.random() - 0.5) * 0.01,
         color: palette[Math.floor(Math.random() * palette.length)],
+        hover: 0,
       });
     }
+
+    /* Cursor reactivity — repel + grab */
+    let mx = -9999, my = -9999;
+    let dragged: Atom | null = null;
+    let dragDX = 0, dragDY = 0;
+    const pickAtom = (cx: number, cy: number) => {
+      let best: Atom | null = null; let bd = Infinity;
+      for (const a of atoms) {
+        const dx = a.x - cx, dy = a.y - cy;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < a.baseR * 0.95 && d < bd) { bd = d; best = a; }
+      }
+      return best;
+    };
+    const onMove = (e: MouseEvent) => {
+      mx = e.clientX; my = e.clientY;
+      if (dragged) { dragged.x = mx - dragDX; dragged.y = my - dragDY; dragged.vx = 0; dragged.vy = 0; }
+    };
+    const onDown = (e: MouseEvent) => {
+      const a = pickAtom(e.clientX, e.clientY);
+      if (a) { dragged = a; dragDX = e.clientX - a.x; dragDY = e.clientY - a.y; e.preventDefault(); }
+    };
+    const onUp = () => {
+      if (dragged) {
+        dragged.vx = (Math.random() - 0.5) * 2;
+        dragged.vy = (Math.random() - 0.5) * 2;
+        dragged = null;
+      }
+    };
+    /* Cursor changes when over an atom */
+    const onMoveCursor = (e: MouseEvent) => {
+      const a = pickAtom(e.clientX, e.clientY);
+      canvas.style.pointerEvents = a ? "auto" : "none";
+      canvas.style.cursor = a ? (dragged ? "grabbing" : "grab") : "auto";
+    };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mousemove", onMoveCursor);
+    window.addEventListener("mousedown", onDown);
+    window.addEventListener("mouseup", onUp);
 
     let time = 0;
     const draw = () => {
@@ -65,16 +105,30 @@ function FloatingAtoms() {
       ctx.clearRect(0, 0, w, h);
 
       for (const a of atoms) {
-        a.x += a.vx;
-        a.y += a.vy;
+        const dx = a.x - mx, dy = a.y - my;
+        const distSq = dx * dx + dy * dy;
+        const range = 260;
+        const inRange = distSq < range * range;
+        const dist = inRange ? Math.sqrt(distSq) : range;
+        a.hover += ((inRange ? 1 - dist / range : 0) - a.hover) * 0.12;
+
+        if (a !== dragged) {
+          if (inRange && distSq > 0.01) {
+            const force = (1 - dist / range) * 1.1;
+            a.vx += (dx / dist) * force;
+            a.vy += (dy / dist) * force;
+          }
+          a.vx *= 0.94; a.vy *= 0.94;
+          a.x += a.vx + Math.sin(time * a.speed + a.phase) * 0.18;
+          a.y += a.vy + Math.cos(time * a.speed + a.phase) * 0.14;
+        }
         if (a.x < -100) a.x = w + 100;
         if (a.x > w + 100) a.x = -100;
         if (a.y < -100) a.y = h + 100;
         if (a.y > h + 100) a.y = -100;
 
         const t = time * a.speed + a.phase;
-        // pulsing size
-        const r = a.baseR * (0.8 + Math.sin(t * 2) * 0.25);
+        const r = a.baseR * (0.8 + Math.sin(t * 2) * 0.25) * (1 + a.hover * 0.18);
 
         ctx.save();
         ctx.translate(a.x, a.y);
@@ -102,18 +156,19 @@ function FloatingAtoms() {
         }
         ctx.closePath();
 
-        // fill with radial gradient
+        // fill with radial gradient — boost on hover
+        const baseAlpha = 0.55 + a.hover * 0.3;
         const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, r * 1.3);
-        grad.addColorStop(0, a.color + "0.55)");
-        grad.addColorStop(0.4, a.color + "0.3)");
-        grad.addColorStop(0.7, a.color + "0.1)");
+        grad.addColorStop(0, a.color + baseAlpha + ")");
+        grad.addColorStop(0.4, a.color + (0.3 + a.hover * 0.2) + ")");
+        grad.addColorStop(0.7, a.color + (0.1 + a.hover * 0.12) + ")");
         grad.addColorStop(1, a.color + "0)");
         ctx.fillStyle = grad;
         ctx.fill();
 
-        // visible border
-        ctx.strokeStyle = a.color + "0.25)";
-        ctx.lineWidth = 1.5;
+        // border — thicker on hover
+        ctx.strokeStyle = a.color + (0.25 + a.hover * 0.5) + ")";
+        ctx.lineWidth = 1.5 + a.hover * 1.5;
         ctx.stroke();
 
         ctx.restore();
@@ -154,6 +209,10 @@ function FloatingAtoms() {
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener("resize", onResize);
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mousemove", onMoveCursor);
+      window.removeEventListener("mousedown", onDown);
+      window.removeEventListener("mouseup", onUp);
     };
   }, []);
 
@@ -163,6 +222,7 @@ function FloatingAtoms() {
       style={{
         position: "fixed", top: 0, left: 0,
         width: "100vw", height: "100vh",
+        /* pointerEvents toggled dynamically — auto when over an atom, none otherwise */
         pointerEvents: "none", zIndex: 0,
       }}
     />
@@ -521,8 +581,8 @@ export default function PortfolioPage() {
         backdropFilter: "blur(16px)", background: "rgba(248,247,244,0.85)",
         borderBottom: "1px solid rgba(0,0,0,0.05)",
       }}>
-        <a href="/" data-cursor-hover style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.1rem", letterSpacing: "0.12em", color: "#111", textDecoration: "none" }}>
-          DIGITALS
+        <a href="/" data-cursor-hover style={{ display: "flex", alignItems: "center", gap: "10px", color: "#111", textDecoration: "none" }} aria-label="Inicio">
+          <img src="/logo-digitals.png" alt="Digitals" style={{ height: "26px", width: "auto" }} />
         </a>
         <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
           <a href="mailto:hola@digitals.cl" data-cursor-hover style={{ fontSize: "0.8rem", color: "#888", textDecoration: "none" }}>hola@digitals.cl</a>
