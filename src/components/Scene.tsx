@@ -90,27 +90,71 @@ function Lighting() {
   );
 }
 
-function Particles({ count = 200 }: { count?: number }) {
+function Particles({ count = 380 }: { count?: number }) {
   const ref = useRef<THREE.Points>(null);
-  const { positions, colors } = useMemo(() => {
+  const matRef = useRef<THREE.PointsMaterial>(null);
+  const { positions, colors, basePos, vel } = useMemo(() => {
     const pos = new Float32Array(count * 3);
+    const base = new Float32Array(count * 3);
     const col = new Float32Array(count * 3);
+    const v = new Float32Array(count * 3);
     const pal = [[1,.25,.25],[1,.6,0],[.95,.95,0],[.2,.85,.3],[.25,.55,1],[.65,.2,1]];
     for (let i = 0; i < count; i++) {
-      pos[i*3]=(Math.random()-.5)*28; pos[i*3+1]=(Math.random()-.5)*20; pos[i*3+2]=Math.random()*12+2;
+      const x=(Math.random()-.5)*28, y=(Math.random()-.5)*20, z=Math.random()*12+2;
+      pos[i*3]=x; pos[i*3+1]=y; pos[i*3+2]=z;
+      base[i*3]=x; base[i*3+1]=y; base[i*3+2]=z;
       const c=pal[Math.floor(Math.random()*pal.length)];
       col[i*3]=c[0]; col[i*3+1]=c[1]; col[i*3+2]=c[2];
     }
-    return { positions: pos, colors: col };
+    return { positions: pos, colors: col, basePos: base, vel: v };
   }, [count]);
-  useFrame(({ clock }) => { if (ref.current) ref.current.rotation.z = Math.sin(clock.elapsedTime * 0.003) * 0.02; });
+  useFrame(({ clock, viewport }) => {
+    if (!ref.current) return;
+    ref.current.rotation.z = Math.sin(clock.elapsedTime * 0.003) * 0.02;
+    /* Cursor-reactive push: each particle drifts away from a virtual mouse plane and slowly returns to base */
+    const mx = (store.mouseX || 0) * (viewport.width / 2);
+    const my = (store.mouseY || 0) * (viewport.height / 2);
+    const arr = (ref.current.geometry.attributes.position as THREE.BufferAttribute).array as Float32Array;
+    const t = clock.elapsedTime;
+    for (let i = 0; i < count; i++) {
+      const ix = i * 3;
+      const bx = basePos[ix], by = basePos[ix+1], bz = basePos[ix+2];
+      const dx = arr[ix] - mx;
+      const dy = arr[ix+1] - my;
+      const distSq = dx*dx + dy*dy;
+      const radius = 5;
+      if (distSq < radius * radius) {
+        const dist = Math.sqrt(distSq) || 0.0001;
+        const force = (1 - dist / radius) * 0.18;
+        vel[ix]   += (dx / dist) * force;
+        vel[ix+1] += (dy / dist) * force;
+        vel[ix+2] += (Math.random() - 0.5) * force * 0.4;
+      }
+      /* Spring back to base + ambient float */
+      vel[ix]   += (bx - arr[ix])   * 0.012;
+      vel[ix+1] += (by - arr[ix+1]) * 0.012;
+      vel[ix+2] += (bz - arr[ix+2]) * 0.012;
+      vel[ix]   *= 0.92;
+      vel[ix+1] *= 0.92;
+      vel[ix+2] *= 0.92;
+      arr[ix]   += vel[ix]   + Math.sin(t * 0.6 + i * 0.3) * 0.002;
+      arr[ix+1] += vel[ix+1] + Math.cos(t * 0.5 + i * 0.4) * 0.002;
+      arr[ix+2] += vel[ix+2];
+    }
+    (ref.current.geometry.attributes.position as THREE.BufferAttribute).needsUpdate = true;
+    /* Pulse opacity subtly with mouse activity */
+    if (matRef.current) {
+      const speed = Math.abs(store.mouseX) + Math.abs(store.mouseY);
+      matRef.current.opacity = 0.5 + Math.min(0.4, speed * 0.3);
+    }
+  });
   return (
     <points ref={ref}>
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
         <bufferAttribute attach="attributes-color" args={[colors, 3]} />
       </bufferGeometry>
-      <pointsMaterial size={0.05} vertexColors transparent opacity={0.5} sizeAttenuation blending={THREE.AdditiveBlending} depthWrite={false} />
+      <pointsMaterial ref={matRef} size={0.06} vertexColors transparent opacity={0.5} sizeAttenuation blending={THREE.AdditiveBlending} depthWrite={false} />
     </points>
   );
 }
@@ -361,11 +405,13 @@ export default function Scene() {
                 </div>
               </ScrollSection>
 
-              {/* ── PAGE 9: PORTAL BUTTON ───────────────── */}
+              {/* ── PAGE 9: PORTAL BUTTON — final CTA ───── */}
               <ScrollSection page={9} align="center">
                 <div style={{ textAlign: "center" }}>
-                  <p className="body-lg" style={{ marginBottom: "2rem", maxWidth: "28rem", margin: "0 auto 2rem" }}>
-                    Explora nuestros proyectos en detalle
+                  <p style={{ fontSize: ".7rem", letterSpacing: ".25em", textTransform: "uppercase", color: "rgba(200,255,0,.7)", marginBottom: "1rem" }}>— Capítulo final —</p>
+                  <h2 className="heading-lg" style={{ marginBottom: "1.5rem" }}>El portafolio te espera.</h2>
+                  <p className="body-lg" style={{ maxWidth: "32rem", margin: "0 auto 3rem" }}>
+                    Cruza el portal y entra al detalle de cada proyecto: KPIs reales, decisiones, equipos y los outcomes medibles de cada caso.
                   </p>
                   <button
                     data-cursor-hover
@@ -376,9 +422,9 @@ export default function Scene() {
                     }}
                   >
                     <span className="portal-btn-glow" />
-                    <span className="portal-btn-text">Ir al Portafolio</span>
+                    <span className="portal-btn-text">Ir al Portafolio<br/>→</span>
                   </button>
-                  <p style={{ marginTop: "3rem", fontSize: "0.6rem", color: "rgba(140,235,255,0.3)" }}>
+                  <p style={{ marginTop: "3rem", fontSize: "0.62rem", color: "rgba(140,235,255,0.4)", letterSpacing: ".15em" }}>
                     © {new Date().getFullYear()} Digitals · Google Premier Partner · Meta Business Partner
                   </p>
                 </div>

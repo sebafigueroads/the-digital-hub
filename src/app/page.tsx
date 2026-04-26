@@ -30,6 +30,21 @@ export default function Home() {
 
       {/* Mouse position → shared store for R3F */}
       <MouseTracker />
+
+      {/* Persistent CTA — always visible, always at the end of any flow */}
+      <a
+        href="/portfolio"
+        data-cursor-hover
+        className="sticky-portfolio-cta"
+        aria-label="Ir al Portafolio"
+      >
+        <span className="sticky-cta-pulse" />
+        <span className="sticky-cta-text">
+          <span className="sticky-cta-kicker">Casa Creativa</span>
+          <span className="sticky-cta-main">Ir al Portafolio</span>
+        </span>
+        <span className="sticky-cta-arrow" aria-hidden="true">→</span>
+      </a>
     </>
   );
 }
