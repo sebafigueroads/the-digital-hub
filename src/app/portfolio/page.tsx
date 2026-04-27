@@ -582,7 +582,7 @@ export default function PortfolioPage() {
         borderBottom: "1px solid rgba(0,0,0,0.05)",
       }}>
         <a href="/" data-cursor-hover style={{ display: "flex", alignItems: "center", gap: "10px", color: "#111", textDecoration: "none" }} aria-label="Inicio">
-          <img src="/logo-digitals.png" alt="Digitals" style={{ height: "26px", width: "auto" }} />
+          <img src="/logo-digitals-dark.png" alt="Digitals" style={{ height: "32px", width: "auto" }} />
         </a>
         <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
           <a href="mailto:hola@digitals.cl" data-cursor-hover style={{ fontSize: "0.8rem", color: "#888", textDecoration: "none" }}>hola@digitals.cl</a>
@@ -700,6 +700,33 @@ export default function PortfolioPage() {
         <p style={{ marginTop: "3rem", fontSize: "0.6rem", color: "#ccc" }}>
           © {new Date().getFullYear()} Digitals · Google Premier Partner · Meta Business Partner
         </p>
+      </section>
+
+      {/* ── BACK TO MAIN SITE ────────────────────────── */}
+      <section style={{ padding: "5rem clamp(1.5rem, 4vw, 3rem)", textAlign: "center", background: "#0a0a0a", color: "#f8f7f4", position: "relative", zIndex: 1, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+        <FadeUp>
+          <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "1rem" }}>— Volver al ecosistema —</p>
+          <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(1.8rem, 4vw, 3rem)", letterSpacing: "-0.02em", lineHeight: 1, marginBottom: "1.4rem" }}>
+            Explora el sitio principal de Digitals
+          </h3>
+          <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.95rem", maxWidth: "30rem", margin: "0 auto 2.4rem", lineHeight: 1.6 }}>
+            Servicios, equipo, AI Labs, blog editorial y todo el ecosistema Grupo Digitals.
+          </p>
+          <a href="https://digitals.cl" data-cursor-hover style={{
+            display: "inline-flex", alignItems: "center", gap: "0.7rem",
+            padding: "1.05rem 2.6rem",
+            background: "transparent", border: "1px solid rgba(255,255,255,0.6)", borderRadius: "100px",
+            color: "#fff", textDecoration: "none",
+            fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "0.95rem",
+            letterSpacing: "0.18em", textTransform: "uppercase",
+            transition: "all 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
+          }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "#fff"; (e.currentTarget as HTMLAnchorElement).style.color = "#0a0a0a"; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; (e.currentTarget as HTMLAnchorElement).style.color = "#fff"; }}
+          >
+            ← Ir a digitals.cl
+          </a>
+        </FadeUp>
       </section>
 
       <style>{`
