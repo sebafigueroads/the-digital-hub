@@ -260,19 +260,22 @@ type CaseStudy = {
   kpi: string;
   kpiLabel: string;
   desc: string;
+  challenge?: string;
   img: string;
   colors: [string, string];
   metrics?: { num: string; label: string }[];
+  quote?: string;
+  quoteAuthor?: string;
 };
 
 const CASES: CaseStudy[] = [
-  { id: "sacyr", client: "Sacyr", title: "Monitoreo 24/7 infraestructura crítica", cat: "Reputation", kpi: "10K+", kpiLabel: "incidencias/mes", desc: "4+ años gestionando 7 concesiones (autopistas + hospitales) con 100% disponibilidad operativa.", img: "/exitos/sacyr.png", colors: ["#ff8800", "#ffa040"], metrics: [{ num: "7+", label: "concesiones" }, { num: "100%", label: "uptime" }, { num: "4+ años", label: "partnership" }] },
-  { id: "ajinomoto", client: "Ajinomoto", title: "De marca desconocida a viral en Chile", cat: "Social Media", kpi: "+320%", kpiLabel: "engagement", desc: "3.8M de alcance. Posicionamiento como referente umami con presencia en retail premium (Tottus, Jumbo).", img: "/exitos/ajinomoto.jpeg", colors: ["#ff4444", "#ff6b35"], metrics: [{ num: "3.8M", label: "alcance" }, { num: "Tottus", label: "retail key" }] },
-  { id: "mundomed", client: "Mundomed", title: "Importación médica con +30% anual", cat: "Performance", kpi: "+30%", kpiLabel: "crecimiento anual", desc: "5+ años de partnership. Embudos full-funnel B2B con leads médicos ultra-calificados constantes.", img: "/exitos/mundomed.png", colors: ["#0891b2", "#06b6d4"], metrics: [{ num: "5+ años", label: "partnership" }, { num: "B2B", label: "lead quality" }] },
-  { id: "hapee", client: "Hapee", title: "CRM con agentes AI que cierran ventas", cat: "AI & Tech", kpi: "+68%", kpiLabel: "LTV", desc: "100+ clientes activos. Plataforma SaaS con agentes IA, voice AI y embudos automatizados en LATAM.", img: "/exitos/hapee.png", colors: ["#8b5cf6", "#a78bfa"], metrics: [{ num: "+35%", label: "conversión" }, { num: "100+", label: "clientes" }] },
-  { id: "develon", client: "Develon", title: "Dominio digital en maquinaria pesada", cat: "Performance", kpi: "+40%", kpiLabel: "crecimiento", desc: "960K impresiones/mes. Lideramos la transición Hyundai → Develon manteniendo autoridad en minería.", img: "/exitos/develon.jpeg", colors: ["#f5c518", "#e8a800"], metrics: [{ num: "960K", label: "impresiones" }, { num: "+25%", label: "lead quality" }] },
-  { id: "fidelogist", client: "Fidelogist", title: "Reuniones C-Level con gigantes LATAM", cat: "B2B Executive", kpi: "9+", kpiLabel: "reuniones C-Level", desc: "PepsiCo, Carozzi, Copec. Programa Digitals Executive para autoridad LinkedIn + prospección automatizada.", img: "/exitos/fidelogist.jpeg", colors: ["#22c55e", "#10b981"], metrics: [{ num: "PepsiCo", label: "C-Level" }, { num: "Carozzi", label: "C-Level" }, { num: "Copec", label: "C-Level" }] },
-  { id: "simplus", client: "Simplus", title: "Funnel industrial automatizado", cat: "B2B", kpi: "18+", kpiLabel: "ciudades", desc: "ROI medible en ventas con automatización B2B de embudos y nurturing por especialidad industrial.", img: "/exitos/simplus.jpeg", colors: ["#3b82f6", "#60a5fa"], metrics: [{ num: "ROI+", label: "medible" }, { num: "18+", label: "ciudades CL" }] },
+  { id: "sacyr", client: "Sacyr", title: "Monitoreo 24/7 infraestructura crítica", cat: "Reputation Management", kpi: "10K+", kpiLabel: "incidencias/mes", desc: "Sistema de Social Listening 24/7 sobre 7+ concesiones (autopistas + hospitales) transformando datos en atención al cliente inmediata.", challenge: "Gestionar comunicación crítica y reputación en tiempo real con alta exposición pública.", img: "/exitos/sacyr.png", colors: ["#ff8800", "#ffa040"], metrics: [{ num: "7+", label: "concesiones" }, { num: "100%", label: "uptime" }, { num: "4+ años", label: "partnership" }], quote: "El aporte de Digitals ha marcado la diferencia en posicionamiento y creatividad. Destacamos su flexibilidad, adaptación y la calidad de su trabajo.", quoteAuthor: "Natalia Marambio · Sacyr" },
+  { id: "ajinomoto", client: "Ajinomoto", title: "De marca desconocida a viral en Chile", cat: "Social Media · Brand", kpi: "+320%", kpiLabel: "engagement", desc: "Estrategia de adaptación gráfica + acompañamiento en terreno. Campañas orgánicas de alto impacto para penetrar el retail masivo chileno.", challenge: "Adaptar una marca líder global al mercado chileno y romper la barrera del retail masivo.", img: "/exitos/ajinomoto.jpeg", colors: ["#ff4444", "#ff6b35"], metrics: [{ num: "3.8M", label: "alcance" }, { num: "Tottus", label: "retail key" }, { num: "Umami", label: "categoría líder" }] },
+  { id: "mundomed", client: "Mundomed", title: "Importación médica con +30% anual sostenido", cat: "Performance · B2B Médico", kpi: "+30%", kpiLabel: "crecimiento anual", desc: "Embudos full-funnel data-driven, marketing de contenidos B2B médico, paid media segmentado por especialidad y automatización IA.", challenge: "Escalar ventas y leads ultra-calificados año tras año en importación de medicamentos.", img: "/exitos/mundomed.png", colors: ["#0891b2", "#06b6d4"], metrics: [{ num: "5+", label: "años" }, { num: "B2B", label: "leads ultra-cal." }, { num: "30%", label: "anual sostenido" }], quote: "Su atención personalizada ha sido clave; siempre están pendientes y dispuestos a atender cada una de nuestras necesidades.", quoteAuthor: "Jens Lehman · Mundomed" },
+  { id: "hapee", client: "Hapee", title: "CRM con agentes IA que cierran ventas", cat: "AI & Tech · SaaS", kpi: "+68%", kpiLabel: "LTV", desc: "Plataforma CRM con agentes IA, embudos automatizados y voice AI como columna vertebral del ecosistema Grupo Digitals.", challenge: "Crear una plataforma SaaS que centralice operación comercial con IA para Chile y LATAM.", img: "/exitos/hapee.png", colors: ["#8b5cf6", "#a78bfa"], metrics: [{ num: "+35%", label: "conversión" }, { num: "100+", label: "clientes activos" }, { num: "LATAM", label: "expansión" }] },
+  { id: "develon", client: "Develon", title: "Dominio digital en maquinaria pesada", cat: "Performance · IMAX", kpi: "+40%", kpiLabel: "crecimiento", desc: "Estrategia IMAX vinculando búsquedas semánticas con activos visuales de alta conversión. Lead Quality Score en mejora continua.", challenge: "Liderar la transición de marca Hyundai → Develon manteniendo autoridad en minería.", img: "/exitos/develon.jpeg", colors: ["#f5c518", "#e8a800"], metrics: [{ num: "960K", label: "impresiones/mes" }, { num: "+25%", label: "lead quality" }, { num: "2 años", label: "crecimiento sostenido" }] },
+  { id: "fidelogist", client: "Fidelogist", title: "Reuniones C-Level con gigantes LATAM", cat: "B2B Executive · LinkedIn", kpi: "9+", kpiLabel: "reuniones C-Level", desc: "Programa Digitals Executive para autoridad LinkedIn + prospección automatizada que abrió la puerta a los compradores más altos del retail latino.", challenge: "Romper la barrera para sentarse con C-Level de las grandes corporaciones LATAM.", img: "/exitos/fidelogist.jpeg", colors: ["#22c55e", "#10b981"], metrics: [{ num: "PepsiCo", label: "C-Level" }, { num: "Carozzi", label: "C-Level" }, { num: "Copec", label: "C-Level" }] },
+  { id: "simplus", client: "Simplus", title: "Funnel industrial automatizado en 18+ ciudades", cat: "B2B · Automatización", kpi: "18+", kpiLabel: "ciudades cubiertas", desc: "Automatización B2B de embudos + nurturing por especialidad industrial. ROI medible en ventas desde el primer trimestre.", challenge: "Escalar ventas industriales con ROI claro y nurturing por vertical.", img: "/exitos/simplus.jpeg", colors: ["#3b82f6", "#60a5fa"], metrics: [{ num: "ROI+", label: "medible" }, { num: "18+", label: "ciudades CL" }, { num: "Industrial", label: "vertical foco" }] },
 ];
 
 /* 29 slots reales con cliente + categoría + estilo */
@@ -609,7 +612,7 @@ export default function PortfolioPage() {
       }}>
         <a href="/" data-cursor-hover style={{ display: "flex", alignItems: "center", gap: "10px", color: C.ink, textDecoration: "none" }} aria-label="Inicio">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo-digitals-white.png" alt="Digitals" style={{ height: "26px", width: "auto" }} />
+          <img src="/logo-digitals-white.png" alt="Digitals" style={{ height: "44px", width: "auto", filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.35))" }} />
         </a>
         <div style={{ display: "flex", gap: "1.6rem", alignItems: "center" }}>
           <a href="mailto:hola@digitals.cl" data-cursor-hover style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: C.mute, textDecoration: "none", letterSpacing: "0.04em" }}>
@@ -731,152 +734,259 @@ export default function PortfolioPage() {
       {/* ── MODAL ──────────────────────────────────────── */}
       <SlotModal slot={openSlot} onClose={() => setOpenSlot(null)} />
 
-      {/* ── CASOS DE ÉXITO · números ──────────────────── */}
+      {/* ── CASOS DE ÉXITO · editorial premium ──────────── */}
       <section style={{
-        padding: "6rem clamp(1.5rem, 4vw, 3rem) 5rem",
-        background: C.bg,
+        padding: "7rem clamp(1.5rem, 4vw, 3rem) 6rem",
+        background: `linear-gradient(180deg, ${C.bg} 0%, ${C.bgSoft} 100%)`,
         position: "relative", zIndex: 1,
         borderTop: `1px solid ${C.line}`,
       }}>
-        <div style={{ maxWidth: "90rem", margin: "0 auto" }}>
+        {/* Subtle background grid */}
+        <div style={{
+          position: "absolute", inset: 0, opacity: 0.04, pointerEvents: "none",
+          backgroundImage: `linear-gradient(${C.ink} 1px, transparent 1px), linear-gradient(90deg, ${C.ink} 1px, transparent 1px)`,
+          backgroundSize: "60px 60px",
+        }} />
+
+        <div style={{ maxWidth: "92rem", margin: "0 auto", position: "relative" }}>
           <FadeUp>
-            <p style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "0.7rem", letterSpacing: "0.28em", textTransform: "uppercase",
-              color: C.cyan, marginBottom: "1rem", fontWeight: 600,
-            }}>01.5 · Casos de éxito</p>
+            <div style={{ display: "flex", alignItems: "baseline", gap: "1.2rem", marginBottom: "1.2rem" }}>
+              <span style={{ width: "60px", height: "1px", background: C.cyan }} />
+              <p style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "0.7rem", letterSpacing: "0.32em", textTransform: "uppercase",
+                color: C.cyan, margin: 0, fontWeight: 700,
+              }}>01.5 · Casos de éxito</p>
+            </div>
             <h2 style={{
               fontFamily: "'Bebas Neue', sans-serif", fontWeight: 400,
-              fontSize: "clamp(2.5rem, 6vw, 4.5rem)", lineHeight: 0.95,
-              letterSpacing: "0.005em", color: C.ink, margin: "0 0 1rem",
+              fontSize: "clamp(3rem, 8vw, 6rem)", lineHeight: 0.92,
+              letterSpacing: "-0.005em", color: C.ink, margin: "0 0 1.4rem",
+              maxWidth: "16ch",
             }}>
-              Números que respaldan el trabajo
+              Resultados<br/>
+              <span style={{ color: C.gold, fontStyle: "italic", fontFamily: "'Bebas Neue', serif" }}>que se pueden medir.</span>
             </h2>
             <p style={{
               fontFamily: "Inter, sans-serif", color: C.mute,
-              fontSize: "1rem", maxWidth: "640px", marginBottom: "3.5rem",
+              fontSize: "1.1rem", maxWidth: "780px", marginBottom: "4.5rem",
+              lineHeight: 1.6,
             }}>
-              7 marcas. Más de 50 millones de impresiones combinadas. Crecimiento sostenido año tras año.
+              7 marcas que confiaron en Digitals desde el día 1. <span style={{ color: C.ink, fontWeight: 600 }}>50M+ impresiones combinadas</span>, partnerships de 4-5 años, y crecimiento sostenido año tras año. Cada número está respaldado por reporting auditable.
             </p>
           </FadeUp>
 
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-            gap: "1.5rem",
-          }}>
-            {CASES.map((c, i) => (
-              <FadeUp key={c.id} delay={i * 0.06}>
-                <article
-                  data-cursor-hover
-                  className="case-num-card"
-                  style={{
-                    position: "relative",
-                    background: C.bgSoft,
-                    border: `1px solid ${C.line}`,
-                    borderRadius: "14px",
-                    overflow: "hidden",
-                    minHeight: "340px",
-                    display: "flex", flexDirection: "column",
-                  }}
-                >
-                  {/* image header */}
+          {/* Aggregate stats bar */}
+          <FadeUp delay={0.1}>
+            <div style={{
+              display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0",
+              border: `1px solid ${C.line}`, borderRadius: "16px",
+              background: "rgba(255,255,255,0.02)", marginBottom: "4rem",
+              overflow: "hidden",
+            }}>
+              {[
+                { num: "50M+", label: "impresiones combinadas" },
+                { num: "7", label: "marcas activas" },
+                { num: "5 años", label: "partnership promedio" },
+                { num: "100%", label: "uptime SLA" },
+              ].map((s, i) => (
+                <div key={s.label} style={{
+                  padding: "2rem 1.5rem", textAlign: "center",
+                  borderRight: i < 3 ? `1px solid ${C.line}` : "none",
+                }}>
                   <div style={{
-                    position: "relative",
-                    height: "150px",
-                    background: `linear-gradient(135deg, ${c.colors[0]}22, ${c.colors[1]}11)`,
-                    overflow: "hidden",
-                  }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={c.img}
-                      alt={c.client}
-                      style={{
-                        width: "100%", height: "100%", objectFit: "cover",
-                        opacity: 0.65, mixBlendMode: "luminosity",
-                      }}
-                      onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-                    />
-                    <div style={{
-                      position: "absolute", inset: 0,
-                      background: `linear-gradient(180deg, transparent 0%, ${C.bgSoft}ee 100%)`,
-                    }} />
-                    {/* client name top-left */}
-                    <p style={{
-                      position: "absolute", top: "1rem", left: "1.1rem",
-                      fontFamily: "Inter, sans-serif", fontWeight: 600,
-                      fontSize: "0.65rem", letterSpacing: "0.22em", textTransform: "uppercase",
-                      color: C.ink, margin: 0,
-                    }}>{c.client}</p>
-                    {/* category top-right */}
-                    <p style={{
-                      position: "absolute", top: "1rem", right: "1.1rem",
-                      fontFamily: "Inter, sans-serif", fontWeight: 500,
-                      fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase",
-                      color: c.colors[0], margin: 0,
-                    }}>{c.cat}</p>
-                  </div>
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontSize: "clamp(2rem, 4vw, 3.2rem)",
+                    color: C.gold, lineHeight: 1, letterSpacing: "-0.005em",
+                  }}>{s.num}</div>
+                  <div style={{
+                    fontFamily: "Inter, sans-serif", fontSize: "0.65rem",
+                    color: C.mute, letterSpacing: "0.18em", textTransform: "uppercase",
+                    marginTop: "0.6rem", fontWeight: 600,
+                  }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </FadeUp>
 
-                  {/* body */}
-                  <div style={{ padding: "1.4rem 1.4rem 1.6rem", display: "flex", flexDirection: "column", flex: 1 }}>
-                    {/* big KPI */}
-                    <div style={{ display: "flex", alignItems: "baseline", gap: "0.7rem", marginBottom: "0.6rem" }}>
+          {/* Editorial cards · 2-up layout */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.8rem" }}>
+            {CASES.map((c, i) => {
+              const reverse = i % 2 === 1;
+              return (
+                <FadeUp key={c.id} delay={i * 0.08}>
+                  <article
+                    data-cursor-hover
+                    className="case-editorial"
+                    style={{
+                      position: "relative",
+                      background: C.bgSoft,
+                      border: `1px solid ${C.line}`,
+                      borderRadius: "18px",
+                      overflow: "hidden",
+                      display: "grid",
+                      gridTemplateColumns: "1fr 1.4fr",
+                      minHeight: "360px",
+                      transition: "transform 0.4s cubic-bezier(.22,1,.36,1), border-color 0.4s, box-shadow 0.4s",
+                    }}
+                  >
+                    {/* IMAGE PANEL */}
+                    <div style={{
+                      position: "relative", overflow: "hidden",
+                      background: `linear-gradient(135deg, ${c.colors[0]}30, ${c.colors[1]}15)`,
+                      order: reverse ? 2 : 1,
+                    }}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={c.img}
+                        alt={c.client}
+                        style={{
+                          position: "absolute", inset: 0,
+                          width: "100%", height: "100%", objectFit: "cover",
+                          opacity: 0.85,
+                        }}
+                        onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                      />
+                      <div style={{
+                        position: "absolute", inset: 0,
+                        background: `linear-gradient(${reverse ? "270deg" : "90deg"}, transparent 40%, ${C.bgSoft}f8 100%)`,
+                      }} />
+                      {/* category badge */}
                       <span style={{
-                        fontFamily: "'Bebas Neue', sans-serif", fontWeight: 400,
-                        fontSize: "clamp(2.6rem, 5vw, 3.6rem)", lineHeight: 0.9,
-                        letterSpacing: "-0.005em",
-                        color: C.gold,
-                      }}>{c.kpi}</span>
-                      <span style={{
-                        fontFamily: "Inter, sans-serif", fontWeight: 500,
-                        fontSize: "0.7rem", color: C.mute,
-                        letterSpacing: "0.12em", textTransform: "uppercase",
-                      }}>{c.kpiLabel}</span>
+                        position: "absolute", top: "1.4rem", left: "1.4rem",
+                        padding: "0.4rem 0.85rem",
+                        background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)",
+                        border: `1px solid ${c.colors[0]}55`,
+                        borderRadius: "100px",
+                        fontFamily: "Inter, sans-serif", fontWeight: 600,
+                        fontSize: "0.58rem", letterSpacing: "0.22em", textTransform: "uppercase",
+                        color: c.colors[0],
+                      }}>{c.cat}</span>
                     </div>
 
-                    {/* title */}
-                    <h3 style={{
-                      fontFamily: "Inter, sans-serif", fontWeight: 600,
-                      fontSize: "0.95rem", color: C.ink, margin: "0 0 0.5rem",
-                      lineHeight: 1.3,
-                    }}>{c.title}</h3>
-
-                    {/* desc */}
-                    <p style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "0.8rem", color: C.mute, margin: 0,
-                      lineHeight: 1.5,
-                    }}>{c.desc}</p>
-
-                    {/* small metrics row */}
-                    {c.metrics && (
-                      <div style={{
-                        marginTop: "auto", paddingTop: "1rem",
-                        display: "flex", gap: "1rem", flexWrap: "wrap",
-                        borderTop: `1px solid ${C.line}`,
-                      }}>
-                        {c.metrics.map((m) => (
-                          <div key={m.label}>
-                            <p style={{
-                              fontFamily: "'Bebas Neue', sans-serif", fontWeight: 400,
-                              fontSize: "1.15rem", color: c.colors[0],
-                              margin: 0, lineHeight: 1, letterSpacing: "0.01em",
-                            }}>{m.num}</p>
-                            <p style={{
-                              fontFamily: "Inter, sans-serif",
-                              fontSize: "0.55rem", color: C.mute,
-                              letterSpacing: "0.16em", textTransform: "uppercase",
-                              margin: "0.25rem 0 0",
-                            }}>{m.label}</p>
-                          </div>
-                        ))}
+                    {/* CONTENT PANEL */}
+                    <div style={{
+                      order: reverse ? 1 : 2,
+                      padding: "clamp(1.8rem, 3vw, 2.8rem)",
+                      display: "flex", flexDirection: "column", justifyContent: "space-between",
+                    }}>
+                      <div>
+                        <p style={{
+                          fontFamily: "Inter, sans-serif", fontWeight: 700,
+                          fontSize: "0.7rem", letterSpacing: "0.28em", textTransform: "uppercase",
+                          color: c.colors[0], margin: "0 0 0.7rem",
+                        }}>{c.client}</p>
+                        <h3 style={{
+                          fontFamily: "'Bebas Neue', sans-serif", fontWeight: 400,
+                          fontSize: "clamp(1.6rem, 3vw, 2.4rem)", lineHeight: 1,
+                          letterSpacing: "0.005em", color: C.ink, margin: "0 0 1rem",
+                        }}>{c.title}</h3>
+                        {c.challenge && (
+                          <p style={{
+                            fontFamily: "Inter, sans-serif", fontSize: "0.78rem",
+                            color: c.colors[0], margin: "0 0 0.8rem", fontWeight: 600,
+                            letterSpacing: "0.04em",
+                          }}>El reto · <span style={{ color: C.mute, fontWeight: 400 }}>{c.challenge}</span></p>
+                        )}
+                        <p style={{
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: "0.92rem", color: C.ink, opacity: 0.85,
+                          margin: 0, lineHeight: 1.55,
+                        }}>{c.desc}</p>
                       </div>
-                    )}
-                  </div>
-                </article>
-              </FadeUp>
-            ))}
+
+                      {/* big KPI + metrics row */}
+                      <div style={{
+                        marginTop: "1.6rem", paddingTop: "1.4rem",
+                        borderTop: `1px solid ${C.line}`,
+                        display: "flex", alignItems: "flex-end", gap: "1.8rem", flexWrap: "wrap",
+                      }}>
+                        <div style={{ flex: "0 0 auto" }}>
+                          <div style={{
+                            fontFamily: "'Bebas Neue', sans-serif", fontWeight: 400,
+                            fontSize: "clamp(2.8rem, 5vw, 4rem)", lineHeight: 0.9,
+                            letterSpacing: "-0.01em",
+                            color: C.gold,
+                            textShadow: `0 0 24px ${C.gold}33`,
+                          }}>{c.kpi}</div>
+                          <div style={{
+                            fontFamily: "Inter, sans-serif", fontWeight: 600,
+                            fontSize: "0.62rem", color: C.mute,
+                            letterSpacing: "0.18em", textTransform: "uppercase",
+                            marginTop: "0.4rem",
+                          }}>{c.kpiLabel}</div>
+                        </div>
+                        {c.metrics && (
+                          <div style={{ display: "flex", gap: "1.4rem", flexWrap: "wrap", flex: "1 1 0" }}>
+                            {c.metrics.map((m) => (
+                              <div key={m.label} style={{ minWidth: "70px" }}>
+                                <p style={{
+                                  fontFamily: "'Bebas Neue', sans-serif", fontWeight: 400,
+                                  fontSize: "1.5rem", color: c.colors[0],
+                                  margin: 0, lineHeight: 1, letterSpacing: "0.01em",
+                                }}>{m.num}</p>
+                                <p style={{
+                                  fontFamily: "Inter, sans-serif",
+                                  fontSize: "0.56rem", color: C.mute,
+                                  letterSpacing: "0.18em", textTransform: "uppercase",
+                                  margin: "0.4rem 0 0", fontWeight: 600,
+                                }}>{m.label}</p>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* testimonial if exists */}
+                      {c.quote && (
+                        <blockquote style={{
+                          marginTop: "1.4rem", marginBottom: 0,
+                          padding: "1rem 1.3rem",
+                          background: `${c.colors[0]}0F`,
+                          borderLeft: `3px solid ${c.colors[0]}`,
+                          borderRadius: "4px",
+                        }}>
+                          <p style={{
+                            fontFamily: "'Bebas Neue', serif", fontStyle: "italic",
+                            fontSize: "1rem", color: C.ink, opacity: 0.9,
+                            margin: 0, lineHeight: 1.4, fontWeight: 400,
+                            letterSpacing: "0.005em",
+                          }}>"{c.quote}"</p>
+                          <p style={{
+                            fontFamily: "Inter, sans-serif", fontWeight: 600,
+                            fontSize: "0.65rem", color: c.colors[0],
+                            letterSpacing: "0.16em", textTransform: "uppercase",
+                            marginTop: "0.7rem", marginBottom: 0,
+                          }}>— {c.quoteAuthor}</p>
+                        </blockquote>
+                      )}
+                    </div>
+                  </article>
+                </FadeUp>
+              );
+            })}
           </div>
+
+          {/* mobile fallback styles */}
+          <style jsx>{`
+            .case-editorial:hover {
+              border-color: rgba(229,187,85,0.35) !important;
+              box-shadow: 0 30px 80px -30px rgba(229,187,85,0.18);
+            }
+            @media (max-width: 820px) {
+              .case-editorial {
+                grid-template-columns: 1fr !important;
+                min-height: 0 !important;
+              }
+              .case-editorial > div:first-child {
+                order: 1 !important;
+                min-height: 240px !important;
+              }
+              .case-editorial > div:last-child {
+                order: 2 !important;
+              }
+            }
+          `}</style>
         </div>
       </section>
 
