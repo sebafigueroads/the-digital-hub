@@ -249,6 +249,32 @@ type Slot = {
   span?: "wide" | "tall";
 };
 
+/* ═══════════════════════════════════════════════════════
+   CASOS DE ÉXITO · números reales (top 7 clientes)
+   ═══════════════════════════════════════════════════════ */
+type CaseStudy = {
+  id: string;
+  client: string;
+  title: string;
+  cat: string;
+  kpi: string;
+  kpiLabel: string;
+  desc: string;
+  img: string;
+  colors: [string, string];
+  metrics?: { num: string; label: string }[];
+};
+
+const CASES: CaseStudy[] = [
+  { id: "sacyr", client: "Sacyr", title: "Monitoreo 24/7 infraestructura crítica", cat: "Reputation", kpi: "10K+", kpiLabel: "incidencias/mes", desc: "4+ años gestionando 7 concesiones (autopistas + hospitales) con 100% disponibilidad operativa.", img: "/exitos/sacyr.png", colors: ["#ff8800", "#ffa040"], metrics: [{ num: "7+", label: "concesiones" }, { num: "100%", label: "uptime" }, { num: "4+ años", label: "partnership" }] },
+  { id: "ajinomoto", client: "Ajinomoto", title: "De marca desconocida a viral en Chile", cat: "Social Media", kpi: "+320%", kpiLabel: "engagement", desc: "3.8M de alcance. Posicionamiento como referente umami con presencia en retail premium (Tottus, Jumbo).", img: "/exitos/ajinomoto.jpeg", colors: ["#ff4444", "#ff6b35"], metrics: [{ num: "3.8M", label: "alcance" }, { num: "Tottus", label: "retail key" }] },
+  { id: "mundomed", client: "Mundomed", title: "Importación médica con +30% anual", cat: "Performance", kpi: "+30%", kpiLabel: "crecimiento anual", desc: "5+ años de partnership. Embudos full-funnel B2B con leads médicos ultra-calificados constantes.", img: "/exitos/mundomed.png", colors: ["#0891b2", "#06b6d4"], metrics: [{ num: "5+ años", label: "partnership" }, { num: "B2B", label: "lead quality" }] },
+  { id: "hapee", client: "Hapee", title: "CRM con agentes AI que cierran ventas", cat: "AI & Tech", kpi: "+68%", kpiLabel: "LTV", desc: "100+ clientes activos. Plataforma SaaS con agentes IA, voice AI y embudos automatizados en LATAM.", img: "/exitos/hapee.png", colors: ["#8b5cf6", "#a78bfa"], metrics: [{ num: "+35%", label: "conversión" }, { num: "100+", label: "clientes" }] },
+  { id: "develon", client: "Develon", title: "Dominio digital en maquinaria pesada", cat: "Performance", kpi: "+40%", kpiLabel: "crecimiento", desc: "960K impresiones/mes. Lideramos la transición Hyundai → Develon manteniendo autoridad en minería.", img: "/exitos/develon.jpeg", colors: ["#f5c518", "#e8a800"], metrics: [{ num: "960K", label: "impresiones" }, { num: "+25%", label: "lead quality" }] },
+  { id: "fidelogist", client: "Fidelogist", title: "Reuniones C-Level con gigantes LATAM", cat: "B2B Executive", kpi: "9+", kpiLabel: "reuniones C-Level", desc: "PepsiCo, Carozzi, Copec. Programa Digitals Executive para autoridad LinkedIn + prospección automatizada.", img: "/exitos/fidelogist.jpeg", colors: ["#22c55e", "#10b981"], metrics: [{ num: "PepsiCo", label: "C-Level" }, { num: "Carozzi", label: "C-Level" }, { num: "Copec", label: "C-Level" }] },
+  { id: "simplus", client: "Simplus", title: "Funnel industrial automatizado", cat: "B2B", kpi: "18+", kpiLabel: "ciudades", desc: "ROI medible en ventas con automatización B2B de embudos y nurturing por especialidad industrial.", img: "/exitos/simplus.jpeg", colors: ["#3b82f6", "#60a5fa"], metrics: [{ num: "ROI+", label: "medible" }, { num: "18+", label: "ciudades CL" }] },
+];
+
 /* 25 slots con placeholders editables luego (cliente + categoría) */
 const SLOTS: Slot[] = [
   { id: "s01", file: "/portfolio-material/cover-01.png", kind: "image", client: "[Cliente]", category: "Cover · Showcase",          span: "wide" },
@@ -696,6 +722,155 @@ export default function PortfolioPage() {
 
       {/* ── MODAL ──────────────────────────────────────── */}
       <SlotModal slot={openSlot} onClose={() => setOpenSlot(null)} />
+
+      {/* ── CASOS DE ÉXITO · números ──────────────────── */}
+      <section style={{
+        padding: "6rem clamp(1.5rem, 4vw, 3rem) 5rem",
+        background: C.bg,
+        position: "relative", zIndex: 1,
+        borderTop: `1px solid ${C.line}`,
+      }}>
+        <div style={{ maxWidth: "90rem", margin: "0 auto" }}>
+          <FadeUp>
+            <p style={{
+              fontFamily: "Inter, sans-serif",
+              fontSize: "0.7rem", letterSpacing: "0.28em", textTransform: "uppercase",
+              color: C.cyan, marginBottom: "1rem", fontWeight: 600,
+            }}>01.5 · Casos de éxito</p>
+            <h2 style={{
+              fontFamily: "'Bebas Neue', sans-serif", fontWeight: 400,
+              fontSize: "clamp(2.5rem, 6vw, 4.5rem)", lineHeight: 0.95,
+              letterSpacing: "0.005em", color: C.ink, margin: "0 0 1rem",
+            }}>
+              Números que respaldan el trabajo
+            </h2>
+            <p style={{
+              fontFamily: "Inter, sans-serif", color: C.mute,
+              fontSize: "1rem", maxWidth: "640px", marginBottom: "3.5rem",
+            }}>
+              7 marcas. Más de 50 millones de impresiones combinadas. Crecimiento sostenido año tras año.
+            </p>
+          </FadeUp>
+
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+            gap: "1.5rem",
+          }}>
+            {CASES.map((c, i) => (
+              <FadeUp key={c.id} delay={i * 0.06}>
+                <article
+                  data-cursor-hover
+                  className="case-num-card"
+                  style={{
+                    position: "relative",
+                    background: C.bgSoft,
+                    border: `1px solid ${C.line}`,
+                    borderRadius: "14px",
+                    overflow: "hidden",
+                    minHeight: "340px",
+                    display: "flex", flexDirection: "column",
+                  }}
+                >
+                  {/* image header */}
+                  <div style={{
+                    position: "relative",
+                    height: "150px",
+                    background: `linear-gradient(135deg, ${c.colors[0]}22, ${c.colors[1]}11)`,
+                    overflow: "hidden",
+                  }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={c.img}
+                      alt={c.client}
+                      style={{
+                        width: "100%", height: "100%", objectFit: "cover",
+                        opacity: 0.65, mixBlendMode: "luminosity",
+                      }}
+                      onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                    />
+                    <div style={{
+                      position: "absolute", inset: 0,
+                      background: `linear-gradient(180deg, transparent 0%, ${C.bgSoft}ee 100%)`,
+                    }} />
+                    {/* client name top-left */}
+                    <p style={{
+                      position: "absolute", top: "1rem", left: "1.1rem",
+                      fontFamily: "Inter, sans-serif", fontWeight: 600,
+                      fontSize: "0.65rem", letterSpacing: "0.22em", textTransform: "uppercase",
+                      color: C.ink, margin: 0,
+                    }}>{c.client}</p>
+                    {/* category top-right */}
+                    <p style={{
+                      position: "absolute", top: "1rem", right: "1.1rem",
+                      fontFamily: "Inter, sans-serif", fontWeight: 500,
+                      fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase",
+                      color: c.colors[0], margin: 0,
+                    }}>{c.cat}</p>
+                  </div>
+
+                  {/* body */}
+                  <div style={{ padding: "1.4rem 1.4rem 1.6rem", display: "flex", flexDirection: "column", flex: 1 }}>
+                    {/* big KPI */}
+                    <div style={{ display: "flex", alignItems: "baseline", gap: "0.7rem", marginBottom: "0.6rem" }}>
+                      <span style={{
+                        fontFamily: "'Bebas Neue', sans-serif", fontWeight: 400,
+                        fontSize: "clamp(2.6rem, 5vw, 3.6rem)", lineHeight: 0.9,
+                        letterSpacing: "-0.005em",
+                        color: C.gold,
+                      }}>{c.kpi}</span>
+                      <span style={{
+                        fontFamily: "Inter, sans-serif", fontWeight: 500,
+                        fontSize: "0.7rem", color: C.mute,
+                        letterSpacing: "0.12em", textTransform: "uppercase",
+                      }}>{c.kpiLabel}</span>
+                    </div>
+
+                    {/* title */}
+                    <h3 style={{
+                      fontFamily: "Inter, sans-serif", fontWeight: 600,
+                      fontSize: "0.95rem", color: C.ink, margin: "0 0 0.5rem",
+                      lineHeight: 1.3,
+                    }}>{c.title}</h3>
+
+                    {/* desc */}
+                    <p style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "0.8rem", color: C.mute, margin: 0,
+                      lineHeight: 1.5,
+                    }}>{c.desc}</p>
+
+                    {/* small metrics row */}
+                    {c.metrics && (
+                      <div style={{
+                        marginTop: "auto", paddingTop: "1rem",
+                        display: "flex", gap: "1rem", flexWrap: "wrap",
+                        borderTop: `1px solid ${C.line}`,
+                      }}>
+                        {c.metrics.map((m) => (
+                          <div key={m.label}>
+                            <p style={{
+                              fontFamily: "'Bebas Neue', sans-serif", fontWeight: 400,
+                              fontSize: "1.15rem", color: c.colors[0],
+                              margin: 0, lineHeight: 1, letterSpacing: "0.01em",
+                            }}>{m.num}</p>
+                            <p style={{
+                              fontFamily: "Inter, sans-serif",
+                              fontSize: "0.55rem", color: C.mute,
+                              letterSpacing: "0.16em", textTransform: "uppercase",
+                              margin: "0.25rem 0 0",
+                            }}>{m.label}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </article>
+              </FadeUp>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ── CLIENT LOGOS (marquee) ────────────────────── */}
       <section
