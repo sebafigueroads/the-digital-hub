@@ -2,7 +2,7 @@
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { ScrollControls, Scroll, useScroll } from "@react-three/drei";
-import { EffectComposer, Bloom, Vignette, BrightnessContrast, HueSaturation } from "@react-three/postprocessing";
+import { EffectComposer, Bloom, Vignette } from "@react-three/postprocessing";
 import { KernelSize } from "postprocessing";
 import { useRef, useMemo, Suspense } from "react";
 import * as THREE from "three";
@@ -133,7 +133,7 @@ function Lighting() {
   );
 }
 
-function Particles({ count = 380 }: { count?: number }) {
+function Particles({ count = 220 }: { count?: number }) {
   const ref = useRef<THREE.Points>(null);
   const matRef = useRef<THREE.PointsMaterial>(null);
   const { positions, colors, basePos, vel } = useMemo(() => {
@@ -277,7 +277,8 @@ export default function Scene() {
           toneMappingExposure: 1.05,
           outputColorSpace: THREE.SRGBColorSpace,
         }}
-        dpr={[1, 1.75]}
+        dpr={[1, 1.5]}
+        performance={{ min: 0.5 }}
       >
         <Suspense fallback={<Loader />}>
           <color attach="background" args={["#0a0806"]} />
@@ -293,13 +294,11 @@ export default function Scene() {
             <EffectComposer multisampling={0} enableNormalPass={false}>
               <Bloom
                 intensity={0.5}
-                luminanceThreshold={0.6}
+                luminanceThreshold={0.65}
                 luminanceSmoothing={0.7}
-                kernelSize={KernelSize.MEDIUM}
+                kernelSize={KernelSize.SMALL}
                 mipmapBlur
               />
-              <BrightnessContrast brightness={0.015} contrast={0.05} />
-              <HueSaturation saturation={0.1} hue={0} />
               <Vignette eskil={false} offset={0.25} darkness={0.5} />
             </EffectComposer>
 
