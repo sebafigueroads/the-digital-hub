@@ -118,15 +118,21 @@ export function HubObject() {
   const depthExt = useLoader(THREE.TextureLoader, "/exterior-depth.jpg");
   const depthInt = useLoader(THREE.TextureLoader, "/interior-depth.jpg");
 
-  // Configure textures
+  // Configure textures · color space + mipmaps + anisotropy max for retina sharpness
   [texExt, texInt].forEach((t) => {
     t.colorSpace = THREE.SRGBColorSpace;
-    t.minFilter = THREE.LinearFilter;
+    t.generateMipmaps = true;
+    t.minFilter = THREE.LinearMipmapLinearFilter;
     t.magFilter = THREE.LinearFilter;
+    t.anisotropy = 16;
+    t.needsUpdate = true;
   });
   [depthExt, depthInt].forEach((t) => {
-    t.minFilter = THREE.LinearFilter;
+    t.generateMipmaps = true;
+    t.minFilter = THREE.LinearMipmapLinearFilter;
     t.magFilter = THREE.LinearFilter;
+    t.anisotropy = 16;
+    t.needsUpdate = true;
   });
 
   const uniforms = useMemo(
@@ -144,41 +150,27 @@ export function HubObject() {
     [texExt, texInt, depthExt, depthInt]
   );
 
-  useFrame(({ clock }) => {
+  useFrame(({ clock }, delta) => {
     if (!matRef.current) return;
+    /* frame-rate independent lerps · feels identical at 60/120/144 Hz */
+    const dt = Math.min(delta, 0.05);
+    const aVel   = 1 - Math.exp(-dt * 14);
+    const aMouse = 1 - Math.exp(-dt * 12);
+    const aBlend = 1 - Math.exp(-dt * 10);
 
-    smoothVel.current = THREE.MathUtils.lerp(
-      smoothVel.current,
-      store.mouseVelocity,
-      0.07
-    );
-    smoothMouse.current.x = THREE.MathUtils.lerp(
-      smoothMouse.current.x,
-      (store.mouseX + 1) * 0.5,
-      0.05
-    );
-    smoothMouse.current.y = THREE.MathUtils.lerp(
-      smoothMouse.current.y,
-      (store.mouseY + 1) * 0.5,
-      0.05
-    );
+    smoothVel.current = THREE.MathUtils.lerp(smoothVel.current, store.mouseVelocity, aVel);
+    smoothMouse.current.x = THREE.MathUtils.lerp(smoothMouse.current.x, (store.mouseX + 1) * 0.5, aMouse);
+    smoothMouse.current.y = THREE.MathUtils.lerp(smoothMouse.current.y, (store.mouseY + 1) * 0.5, aMouse);
 
     // Crossfade: exterior (0-25%) → transition (25-40%) → interior (40-100%)
     const offset = scroll.offset;
     const blend = THREE.MathUtils.smoothstep(offset, 0.22, 0.42);
-    smoothBlend.current = THREE.MathUtils.lerp(
-      smoothBlend.current,
-      blend,
-      0.06
-    );
+    smoothBlend.current = THREE.MathUtils.lerp(smoothBlend.current, blend, aBlend);
 
     matRef.current.uniforms.uTime.value = clock.elapsedTime;
     matRef.current.uniforms.uBlend.value = smoothBlend.current;
     matRef.current.uniforms.uDistortion.value = Math.min(smoothVel.current, 4);
-    matRef.current.uniforms.uMouse.value.set(
-      smoothMouse.current.x,
-      smoothMouse.current.y
-    );
+    matRef.current.uniforms.uMouse.value.set(smoothMouse.current.x, smoothMouse.current.y);
   });
 
   // Landscape: 2048 × 1143 → aspect ≈ 1.79
@@ -187,7 +179,7 @@ export function HubObject() {
 
   return (
     <mesh>
-      <planeGeometry args={[W, H, 180, 100]} />
+      <planeGeometry args={[W, H, 240, 134]} />
       <shaderMaterial
         ref={matRef}
         vertexShader={vertexShader}

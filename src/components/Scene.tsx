@@ -2,6 +2,8 @@
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { ScrollControls, Scroll, useScroll } from "@react-three/drei";
+import { EffectComposer, Bloom, Vignette, ChromaticAberration, BrightnessContrast, HueSaturation } from "@react-three/postprocessing";
+import { BlendFunction, KernelSize } from "postprocessing";
 import { useRef, useMemo, Suspense } from "react";
 import * as THREE from "three";
 import { store } from "@/lib/store";
@@ -57,10 +59,14 @@ function CameraRig() {
   const sOff = useRef(0);
   const sMx = useRef(0);
   const sMy = useRef(0);
-  useFrame(() => {
-    sOff.current = THREE.MathUtils.lerp(sOff.current, scroll.offset, 0.035);
-    sMx.current = THREE.MathUtils.lerp(sMx.current, store.mouseX, 0.04);
-    sMy.current = THREE.MathUtils.lerp(sMy.current, store.mouseY, 0.04);
+  useFrame((_, delta) => {
+    /* frame-rate independent lerp · ~85ms time-constant for scroll, ~70ms for mouse */
+    const dt = Math.min(delta, 0.05);
+    const aScroll = 1 - Math.exp(-dt * 12);
+    const aMouse  = 1 - Math.exp(-dt * 14);
+    sOff.current = THREE.MathUtils.lerp(sOff.current, scroll.offset, aScroll);
+    sMx.current = THREE.MathUtils.lerp(sMx.current, store.mouseX, aMouse);
+    sMy.current = THREE.MathUtils.lerp(sMy.current, store.mouseY, aMouse);
     /* Expose scroll progress to outside React for sticky CTA visibility */
     store.scrollProgress = scroll.offset;
     const c = interpCamera(sOff.current);
@@ -75,19 +81,21 @@ function Lighting() {
   const main = useRef<THREE.PointLight>(null);
   const mx = useRef(0);
   const my = useRef(0);
-  useFrame(() => {
-    mx.current = THREE.MathUtils.lerp(mx.current, store.mouseX * 8, 0.035);
-    my.current = THREE.MathUtils.lerp(my.current, store.mouseY * 6, 0.035);
+  useFrame((_, delta) => {
+    const dt = Math.min(delta, 0.05);
+    const a = 1 - Math.exp(-dt * 12);
+    mx.current = THREE.MathUtils.lerp(mx.current, store.mouseX * 8, a);
+    my.current = THREE.MathUtils.lerp(my.current, store.mouseY * 6, a);
     if (main.current) main.current.position.set(mx.current, my.current + 3, 10);
   });
   return (
     <>
-      <ambientLight intensity={0.3} color="#eeddcc" />
-      <pointLight ref={main} intensity={2.5} distance={35} decay={2} color="#ffffff" />
-      <pointLight position={[0, 10, 6]} intensity={1} distance={30} decay={2} color="#ffeecc" />
-      <pointLight position={[-6, 0, 5]} intensity={0.6} distance={20} decay={2} color="#ff4444" />
-      <pointLight position={[3, 0, 5]} intensity={0.6} distance={20} decay={2} color="#4488ff" />
-      <pointLight position={[6, 0, 5]} intensity={0.6} distance={20} decay={2} color="#ffaa00" />
+      <ambientLight intensity={0.35} color="#eeddcc" />
+      <pointLight ref={main} intensity={3.2} distance={38} decay={2} color="#ffffff" />
+      <pointLight position={[0, 10, 6]} intensity={1.2} distance={32} decay={2} color="#ffeecc" />
+      <pointLight position={[-6, 0, 5]} intensity={0.8} distance={22} decay={2} color="#ff5544" />
+      <pointLight position={[3, 0, 5]} intensity={0.8} distance={22} decay={2} color="#4488ff" />
+      <pointLight position={[6, 0, 5]} intensity={0.8} distance={22} decay={2} color="#ffaa22" />
     </>
   );
 }
@@ -226,16 +234,47 @@ const TESTIMONIALS = [
 export default function Scene() {
   return (
     <div style={{ position: "fixed", inset: 0, zIndex: 1 }}>
-      <Canvas camera={{ fov: 55, near: 0.1, far: 120, position: [0, 1, 26] }} gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }} dpr={[1, 1.5]}>
+      <Canvas
+        camera={{ fov: 55, near: 0.1, far: 120, position: [0, 1, 26] }}
+        gl={{
+          antialias: true,
+          alpha: true,
+          powerPreference: "high-performance",
+          toneMapping: THREE.ACESFilmicToneMapping,
+          toneMappingExposure: 1.05,
+          outputColorSpace: THREE.SRGBColorSpace,
+        }}
+        dpr={[1, 2]}
+      >
         <Suspense fallback={<Loader />}>
           <color attach="background" args={["#0a0806"]} />
           <fog attach="fog" args={["#0a0806", 22, 50]} />
 
-          <ScrollControls pages={PAGES} damping={0.3}>
+          <ScrollControls pages={PAGES} damping={0.45}>
             <CameraRig />
             <Lighting />
             <HubObject />
             <Particles />
+
+            {/* Cinematic post-processing · subtle but premium */}
+            <EffectComposer multisampling={0} enableNormalPass={false}>
+              <Bloom
+                intensity={0.6}
+                luminanceThreshold={0.55}
+                luminanceSmoothing={0.7}
+                kernelSize={KernelSize.LARGE}
+                mipmapBlur
+              />
+              <ChromaticAberration
+                blendFunction={BlendFunction.NORMAL}
+                offset={new THREE.Vector2(0.0006, 0.0006)}
+                radialModulation
+                modulationOffset={0.5}
+              />
+              <BrightnessContrast brightness={0.02} contrast={0.06} />
+              <HueSaturation saturation={0.12} hue={0} />
+              <Vignette eskil={false} offset={0.22} darkness={0.55} />
+            </EffectComposer>
 
             <Scroll html style={{ width: "100%" }}>
 
