@@ -600,7 +600,9 @@ export default function PortfolioPage() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
-    <div style={{ background: C.bg, color: C.ink, position: "relative", minHeight: "100vh" }}>
+    <div className="portfolio-enter" style={{ background: C.bg, color: C.ink, position: "relative", minHeight: "100vh" }}>
+      {/* Portal entry overlay · fades from cyan-white to transparent as you "land" in the room */}
+      <div className="portfolio-entry-flash" aria-hidden="true" />
       <CustomCursor />
       <FloatingAtoms />
 
@@ -1225,6 +1227,32 @@ export default function PortfolioPage() {
         }
         @media (hover: none) {
           a, button, [data-cursor-hover], [role="button"] { cursor: pointer; }
+        }
+
+        /* PORTFOLIO ENTRY · viene del portal del hub home · zoom-out + fade desde cyan-white */
+        .portfolio-enter {
+          animation: portfolio-enter-zoom 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+          transform-origin: center center;
+        }
+        @keyframes portfolio-enter-zoom {
+          0%   { transform: scale(1.3); filter: blur(8px) brightness(1.4); }
+          60%  { filter: blur(0px) brightness(1.05); }
+          100% { transform: scale(1); filter: blur(0px) brightness(1); }
+        }
+        .portfolio-entry-flash {
+          position: fixed; inset: 0; z-index: 9998;
+          pointer-events: none;
+          background: radial-gradient(circle at 50% 50%,
+            rgba(255,255,255,0.95) 0%,
+            rgba(0, 212, 255, 0.6) 35%,
+            rgba(0, 212, 255, 0.25) 65%,
+            rgba(0,0,0,0) 100%);
+          animation: portfolio-entry-fade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          will-change: opacity, transform;
+        }
+        @keyframes portfolio-entry-fade {
+          0%   { opacity: 1; transform: scale(2); }
+          100% { opacity: 0; transform: scale(0.5); }
         }
 
         @keyframes marquee {

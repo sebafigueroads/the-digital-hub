@@ -71,8 +71,41 @@ function CameraRig() {
     store.scrollProgress = scroll.offset;
     const c = interpCamera(sOff.current);
     const p = Math.max(0.2, 1 - c.pz / 26);
-    camera.position.set(c.px + sMx.current * 0.8 * p, c.py + sMy.current * 0.4 * p, c.pz);
-    camera.lookAt(c.lx, c.ly, c.lz);
+
+    /* Portal zoom-in: at scroll end (page 9), the camera dives THROUGH the hub plane
+       toward z=−4 (behind the wall), simulating "entering the room" */
+    const portal = store.portalProgress;
+    if (portal > 0) {
+      /* eased dive · easeInQuart for accelerating zoom */
+      const eased = portal * portal * portal * portal;
+      /* Interpolate from current scroll-based camera to a deep-zoom target */
+      const targetZ = -4;
+      const targetX = 0;
+      const targetY = 1.5;
+      const lookTargetZ = -10;
+      camera.position.set(
+        THREE.MathUtils.lerp(c.px + sMx.current * 0.8 * p, targetX, eased),
+        THREE.MathUtils.lerp(c.py + sMy.current * 0.4 * p, targetY, eased),
+        THREE.MathUtils.lerp(c.pz, targetZ, eased)
+      );
+      camera.lookAt(
+        THREE.MathUtils.lerp(c.lx, 0, eased),
+        THREE.MathUtils.lerp(c.ly, targetY, eased),
+        THREE.MathUtils.lerp(c.lz, lookTargetZ, eased)
+      );
+      /* Slight FOV increase = sense of acceleration */
+      const persp = camera as THREE.PerspectiveCamera;
+      persp.fov = THREE.MathUtils.lerp(55, 95, eased);
+      persp.updateProjectionMatrix();
+    } else {
+      camera.position.set(c.px + sMx.current * 0.8 * p, c.py + sMy.current * 0.4 * p, c.pz);
+      camera.lookAt(c.lx, c.ly, c.lz);
+      const persp = camera as THREE.PerspectiveCamera;
+      if (persp.fov !== 55) {
+        persp.fov = 55;
+        persp.updateProjectionMatrix();
+      }
+    }
   });
   return null;
 }
@@ -452,8 +485,25 @@ export default function Scene() {
                     data-cursor-hover
                     className="portal-btn"
                     onClick={() => {
-                      document.body.classList.add("zoom-portal");
-                      setTimeout(() => { window.location.href = "/portfolio"; }, 900);
+                      /* Don't trigger twice */
+                      if (store.portalProgress > 0) return;
+                      /* Build a flash overlay (cyan radial expanding from button) */
+                      const overlay = document.createElement("div");
+                      overlay.className = "portal-flash";
+                      document.body.appendChild(overlay);
+                      /* Hide all scroll-html UI behind the canvas so only 3D zoom is visible */
+                      document.body.classList.add("portal-active");
+                      /* Animate portalProgress 0 → 1 over ~1.4s */
+                      const t0 = performance.now();
+                      const dur = 1400;
+                      const animate = (now: number) => {
+                        const t = Math.min(1, (now - t0) / dur);
+                        store.portalProgress = t;
+                        if (t < 1) requestAnimationFrame(animate);
+                      };
+                      requestAnimationFrame(animate);
+                      /* Redirect to portfolio after the zoom completes */
+                      setTimeout(() => { window.location.href = "/portfolio"; }, 1300);
                     }}
                   >
                     <span className="portal-btn-glow" />

@@ -573,14 +573,48 @@ body.hub-page {
   100% { transform: rotate(-360deg); }
 }
 
-/* ── Zoom portal transition ──────────────────────── */
-.zoom-portal {
-  animation: zoom-into-portal 0.9s ease-in forwards;
+/* ── Portal zoom-in transition · 3D camera dives + HTML fades + cyan flash ── */
+.portal-active [data-r3f-scroll-html] {
+  animation: portal-html-fade 0.8s ease-in forwards;
+  pointer-events: none !important;
+}
+.portal-active .portal-btn,
+.portal-active .sticky-portfolio-cta {
+  animation: portal-btn-burst 0.8s ease-out forwards;
   pointer-events: none !important;
 }
 
-@keyframes zoom-into-portal {
-  0%   { transform: scale(1); filter: brightness(1); opacity: 1; }
-  60%  { transform: scale(2.5); filter: brightness(1.5); opacity: 1; }
-  100% { transform: scale(5); filter: brightness(3); opacity: 0; }
+@keyframes portal-html-fade {
+  0%   { opacity: 1; transform: scale(1); filter: blur(0px); }
+  100% { opacity: 0; transform: scale(1.25); filter: blur(8px); }
 }
+
+@keyframes portal-btn-burst {
+  0%   { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.7); }
+  60%  { transform: scale(1.4); opacity: 0.5; box-shadow: 0 0 0 200px rgba(0, 212, 255, 0); }
+  100% { transform: scale(2); opacity: 0; box-shadow: 0 0 0 400px rgba(0, 212, 255, 0); }
+}
+
+/* Cyan radial flash overlay · grows from screen center as camera dives in */
+.portal-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%,
+    rgba(0, 212, 255, 0) 0%,
+    rgba(0, 212, 255, 0) 30%,
+    rgba(0, 212, 255, 0.35) 60%,
+    rgba(255, 255, 255, 0.95) 100%);
+  opacity: 0;
+  animation: portal-flash-in 1.3s cubic-bezier(0.55, 0, 0.95, 0.85) forwards;
+  will-change: opacity, transform;
+}
+@keyframes portal-flash-in {
+  0%   { opacity: 0; transform: scale(0.3); }
+  55%  { opacity: 0.8; transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(2); }
+}
+
+/* Legacy class kept for back-compat (no-op) */
+.zoom-portal { pointer-events: none !important; }

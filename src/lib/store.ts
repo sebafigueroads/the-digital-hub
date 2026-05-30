@@ -9,4 +9,6 @@ export const store = {
   mouseY: 0,
   // Mouse speed (pixels/frame, decayed)
   mouseVelocity: 0,
+  // Portal zoom-in transition · 0 = off, 0→1 = animating into the room
+  portalProgress: 0,
 };
