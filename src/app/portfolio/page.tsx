@@ -286,6 +286,7 @@ const SLOTS: Slot[] = [
   { id: "web-heliforklift",     file: "/portfolio-material/web-heliforklift.jpg",                    kind: "image", client: "Heli Forklift Chile", category: "Diseño Web · Live",  span: "wide", liveUrl: "https://heliforklift.cl/" },
   { id: "web-iphoneup",         file: "/portfolio-material/web-iphoneup.jpg",                        kind: "image", client: "iPhone Up",           category: "Diseño Web · Live",  span: "wide", liveUrl: "https://iphoneup.cl/" },
   { id: "la-oferta-hero",       file: "/portfolio-material/la-oferta-hero.mp4",                     kind: "video", client: "La Oferta",       category: "Brand · Hero",         span: "wide" },
+  { id: "la-oferta-street",     file: "/portfolio-material/la-oferta-street.mp4",                   kind: "video", client: "La Oferta",       category: "Brand · Street",       span: "wide" },
   { id: "iphone-up-hero",       file: "/portfolio-material/iphone-up-hero.mp4",                     kind: "video", client: "iPhone Up",       category: "Brand · Hero" },
   { id: "la-estampa-hero",      file: "/portfolio-material/la-estampa-hero.mp4",                    kind: "video", client: "La Estampa",      category: "Brand · Hero" },
   { id: "nova-promo",           file: "/portfolio-material/nova-promo.mp4",                         kind: "video", client: "Nova Promo",      category: "Brand · Spot" },
@@ -304,13 +305,13 @@ const SLOTS: Slot[] = [
   { id: "nova-group-ig",        file: "/portfolio-material/nova-group-instagram.mp4",               kind: "video", client: "Nova Group",      category: "Social Media · Reel" },
   { id: "nova-group-li",        file: "/portfolio-material/nova-group-linkedin-aesthetic.mp4",      kind: "video", client: "Nova Group",      category: "B2B · LinkedIn" },
 
-  { id: "clinica-glowing",      file: "/portfolio-material/clinica-glowing-effecting.mp4",          kind: "video", client: "Clínica Glowing", category: "AI · Effecting" },
-  { id: "heli-aesthetic",       file: "/portfolio-material/heli-chile-aesthetic.mp4",               kind: "video", client: "Heli Chile",      category: "AI · Effecting" },
+  { id: "clinica-glowing",      file: "/portfolio-material/clinica-glowing-effecting.mp4",          kind: "video", client: "Clínica Glowing", category: "After Effects · PRO Production" },
+  { id: "heli-aesthetic",       file: "/portfolio-material/heli-chile-aesthetic.mp4",               kind: "video", client: "Heli Chile",      category: "After Effects · PRO Production" },
   { id: "heli-chile",           file: "/portfolio-material/heli-chile.mp4",                         kind: "video", client: "Heli Chile",      category: "B2B · Corporate" },
-  { id: "otra-vista-4d",        file: "/portfolio-material/otra-vista-effecting-4d.mp4",            kind: "video", client: "Otra Vista",     category: "AI · Effecting" },
-  { id: "otra-vista-effects",   file: "/portfolio-material/otra-vista-effects.mp4",                 kind: "video", client: "Otra Vista",     category: "AI · Effecting" },
-  { id: "la-estampa-effecting", file: "/portfolio-material/la-estampa-instagram-effecting.mp4",     kind: "video", client: "La Estampa",      category: "AI · Effecting" },
-  { id: "telectronic-effect",   file: "/portfolio-material/telectronic-effecting-executive.mp4",    kind: "video", client: "Telectronic",     category: "AI · Effecting" },
+  { id: "otra-vista-4d",        file: "/portfolio-material/otra-vista-effecting-4d.mp4",            kind: "video", client: "Otra Vista",     category: "After Effects · PRO Production" },
+  { id: "otra-vista-effects",   file: "/portfolio-material/otra-vista-effects.mp4",                 kind: "video", client: "Otra Vista",     category: "After Effects · PRO Production" },
+  { id: "la-estampa-effecting", file: "/portfolio-material/la-estampa-instagram-effecting.mp4",     kind: "video", client: "La Estampa",      category: "After Effects · PRO Production" },
+  { id: "telectronic-effect",   file: "/portfolio-material/telectronic-effecting-executive.mp4",    kind: "video", client: "Telectronic",     category: "After Effects · PRO Production" },
 
   { id: "develon-ads",          file: "/portfolio-material/develon-ads.mp4",                        kind: "video", client: "Develon",         category: "Performance · Ad" },
   { id: "develon-ig",           file: "/portfolio-material/develon-instagram.mp4",                  kind: "video", client: "Develon",         category: "Social Media · Reel" },
@@ -320,7 +321,7 @@ const SLOTS: Slot[] = [
   { id: "simplus-turbus-2",     file: "/portfolio-material/simplus-turbus-2.mp4",                   kind: "video", client: "Simplus · Turbus",category: "B2B · Corporate" },
 ];
 
-const CATEGORIES = ["Todos", "Diseño Web · Live", "Brand · Hero", "Brand · Spot", "Brand · Campaña", "Social Media · Reel", "AI · Effecting", "Performance · Ad", "B2B · Corporate", "B2B · LinkedIn"];
+const CATEGORIES = ["Todos", "Diseño Web · Live", "Brand · Hero", "Brand · Spot", "Brand · Street", "Brand · Campaña", "Social Media · Reel", "After Effects · PRO Production", "Performance · Ad", "B2B · Corporate", "B2B · LinkedIn"];
 
 const CLIENT_LOGOS = [
   "burger_king.png", "clinica_indisa.png", "logo-chery.png", "mundomed.png",
