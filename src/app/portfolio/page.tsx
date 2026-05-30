@@ -248,6 +248,7 @@ type Slot = {
   client: string;
   category: string;
   span?: "wide" | "tall";
+  liveUrl?: string;
 };
 
 /* ═══════════════════════════════════════════════════════
@@ -271,8 +272,6 @@ type CaseStudy = {
 };
 
 const CASES: CaseStudy[] = [
-  { id: "heli", client: "Heli Forklift Chile", title: "Especialistas en grúas horquillas · web award-winning", cat: "Diseño Web · B2B Industrial", kpi: "67+", kpiLabel: "años de experiencia", desc: "Venta y servicio técnico de grúas horquillas HELI con respuesta en menos de 2 horas. Catálogo completo eléctricas/diésel/GLP + repuestos originales + servicio técnico integrado.", challenge: "Construir presencia digital premium para distribuidor oficial HELI Group (LATAM) destacando velocidad de respuesta operacional.", img: "/exitos/heli-hero.jpg", colors: ["#CE142D", "#FF3344"], metrics: [{ num: "+1100", label: "equipos vendidos" }, { num: "142+", label: "países HELI" }, { num: "<2h", label: "tiempo de respuesta" }], liveUrl: "https://heliforklift.cl/" },
-  { id: "iphoneup", client: "iPhone Up", title: "Tu iPhone, siempre UP · ecommerce Apple sellados + seminuevos", cat: "Diseño Web · Retail Tech", kpi: "+5.000", kpiLabel: "iPhones vendidos", desc: "Plataforma para iPhones del 11 al 17 sellados y seminuevos 100% originales · garantía 6 meses · tienda física Providencia · catálogo + flujo 'Vende tu iPhone' integrado.", challenge: "Posicionar reacondicionado/seminuevo como premium · transmitir confianza Apple Store-tier al cliente que busca ahorrar sin perder experiencia.", img: "/exitos/iphoneup-hero.jpg", colors: ["#B6FF3C", "#7FCB1F"], metrics: [{ num: "4.9★", label: "calificación" }, { num: "6 meses", label: "garantía oficial" }, { num: "100%", label: "originales" }], liveUrl: "https://iphoneup.cl/" },
   { id: "sacyr", client: "Sacyr", title: "Monitoreo 24/7 infraestructura crítica", cat: "Reputation Management", kpi: "10K+", kpiLabel: "incidencias/mes", desc: "Sistema de Social Listening 24/7 sobre 7+ concesiones (autopistas + hospitales) transformando datos en atención al cliente inmediata.", challenge: "Gestionar comunicación crítica y reputación en tiempo real con alta exposición pública.", img: "/exitos/sacyr.png", colors: ["#ff8800", "#ffa040"], metrics: [{ num: "7+", label: "concesiones" }, { num: "100%", label: "uptime" }, { num: "4+ años", label: "partnership" }], quote: "El aporte de Digitals ha marcado la diferencia en posicionamiento y creatividad. Destacamos su flexibilidad, adaptación y la calidad de su trabajo.", quoteAuthor: "Natalia Marambio · Sacyr" },
   { id: "ajinomoto", client: "Ajinomoto", title: "De marca desconocida a viral en Chile", cat: "Social Media · Brand", kpi: "+320%", kpiLabel: "engagement", desc: "Estrategia de adaptación gráfica + acompañamiento en terreno. Campañas orgánicas de alto impacto para penetrar el retail masivo chileno.", challenge: "Adaptar una marca líder global al mercado chileno y romper la barrera del retail masivo.", img: "/exitos/ajinomoto.jpeg", colors: ["#ff4444", "#ff6b35"], metrics: [{ num: "3.8M", label: "alcance" }, { num: "Tottus", label: "retail key" }, { num: "Umami", label: "categoría líder" }] },
   { id: "mundomed", client: "Mundomed", title: "Importación médica con +30% anual sostenido", cat: "Performance · B2B Médico", kpi: "+30%", kpiLabel: "crecimiento anual", desc: "Embudos full-funnel data-driven, marketing de contenidos B2B médico, paid media segmentado por especialidad y automatización IA.", challenge: "Escalar ventas y leads ultra-calificados año tras año en importación de medicamentos.", img: "/exitos/mundomed.png", colors: ["#0891b2", "#06b6d4"], metrics: [{ num: "5+", label: "años" }, { num: "B2B", label: "leads ultra-cal." }, { num: "30%", label: "anual sostenido" }], quote: "Su atención personalizada ha sido clave; siempre están pendientes y dispuestos a atender cada una de nuestras necesidades.", quoteAuthor: "Jens Lehman · Mundomed" },
@@ -282,8 +281,10 @@ const CASES: CaseStudy[] = [
   { id: "simplus", client: "Simplus", title: "Funnel industrial automatizado en 18+ ciudades", cat: "B2B · Automatización", kpi: "18+", kpiLabel: "ciudades cubiertas", desc: "Automatización B2B de embudos + nurturing por especialidad industrial. ROI medible en ventas desde el primer trimestre.", challenge: "Escalar ventas industriales con ROI claro y nurturing por vertical.", img: "/exitos/simplus.jpeg", colors: ["#3b82f6", "#60a5fa"], metrics: [{ num: "ROI+", label: "medible" }, { num: "18+", label: "ciudades CL" }, { num: "Industrial", label: "vertical foco" }] },
 ];
 
-/* 29 slots reales con cliente + categoría + estilo */
+/* 31 slots reales con cliente + categoría + estilo · incluye webs en producción */
 const SLOTS: Slot[] = [
+  { id: "web-heliforklift",     file: "/portfolio-material/web-heliforklift.jpg",                    kind: "image", client: "Heli Forklift Chile", category: "Diseño Web · Live",  span: "wide", liveUrl: "https://heliforklift.cl/" },
+  { id: "web-iphoneup",         file: "/portfolio-material/web-iphoneup.jpg",                        kind: "image", client: "iPhone Up",           category: "Diseño Web · Live",  span: "wide", liveUrl: "https://iphoneup.cl/" },
   { id: "la-oferta-hero",       file: "/portfolio-material/la-oferta-hero.mp4",                     kind: "video", client: "La Oferta",       category: "Brand · Hero",         span: "wide" },
   { id: "iphone-up-hero",       file: "/portfolio-material/iphone-up-hero.mp4",                     kind: "video", client: "iPhone Up",       category: "Brand · Hero" },
   { id: "la-estampa-hero",      file: "/portfolio-material/la-estampa-hero.mp4",                    kind: "video", client: "La Estampa",      category: "Brand · Hero" },
@@ -319,7 +320,7 @@ const SLOTS: Slot[] = [
   { id: "simplus-turbus-2",     file: "/portfolio-material/simplus-turbus-2.mp4",                   kind: "video", client: "Simplus · Turbus",category: "B2B · Corporate" },
 ];
 
-const CATEGORIES = ["Todos", "Brand · Hero", "Brand · Spot", "Brand · Campaña", "Social Media · Reel", "AI · Effecting", "Performance · Ad", "B2B · Corporate", "B2B · LinkedIn"];
+const CATEGORIES = ["Todos", "Diseño Web · Live", "Brand · Hero", "Brand · Spot", "Brand · Campaña", "Social Media · Reel", "AI · Effecting", "Performance · Ad", "B2B · Corporate", "B2B · LinkedIn"];
 
 const CLIENT_LOGOS = [
   "burger_king.png", "clinica_indisa.png", "logo-chery.png", "mundomed.png",
@@ -376,7 +377,13 @@ function SlotCard({ slot, index, onOpen }: { slot: Slot; index: number; onOpen: 
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.7, delay: (index % 6) * 0.05, ease: [0.22, 1, 0.36, 1] }}
       data-cursor-hover
-      onClick={() => onOpen(slot)}
+      onClick={() => {
+        if (slot.liveUrl) {
+          window.open(slot.liveUrl, "_blank", "noopener,noreferrer");
+        } else {
+          onOpen(slot);
+        }
+      }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       className="slot-card"
@@ -492,11 +499,27 @@ function SlotCard({ slot, index, onOpen }: { slot: Slot; index: number; onOpen: 
           transition: "opacity 0.35s, transform 0.35s",
           fontFamily: "Inter, sans-serif",
           fontSize: "0.6rem", letterSpacing: "0.22em", textTransform: "uppercase",
-          color: C.cyan, fontWeight: 700,
+          color: slot.liveUrl ? C.gold : C.cyan, fontWeight: 700,
         }}
       >
-        Ver pieza →
+        {slot.liveUrl ? "Ver web ↗" : "Ver pieza →"}
       </div>
+
+      {/* Badge "LIVE" para slots con liveUrl */}
+      {slot.liveUrl && (
+        <span style={{
+          position: "absolute", top: "0.9rem", left: "calc(0.9rem + 130px)",
+          fontFamily: "Inter, sans-serif",
+          fontSize: "0.52rem", letterSpacing: "0.24em", textTransform: "uppercase",
+          color: "#0A0A0A", fontWeight: 800,
+          background: C.gold,
+          padding: "0.3rem 0.6rem", borderRadius: "3px",
+          display: "inline-flex", alignItems: "center", gap: "0.4rem",
+        }}>
+          <span style={{ width: "5px", height: "5px", background: "#0A0A0A", borderRadius: "50%", display: "inline-block" }} />
+          LIVE
+        </span>
+      )}
     </motion.div>
   );
 }
@@ -772,7 +795,7 @@ export default function PortfolioPage() {
               fontSize: "1.1rem", maxWidth: "780px", marginBottom: "4.5rem",
               lineHeight: 1.6,
             }}>
-              <span style={{ color: C.ink, fontWeight: 600 }}>50M+ impresiones combinadas</span>, 9 casos activos · partnerships de 4-5 años · webs en producción para marcas líderes. Cada número está respaldado por reporting auditable.
+              <span style={{ color: C.ink, fontWeight: 600 }}>50M+ impresiones combinadas</span>, partnerships de 4-5 años · y crecimiento sostenido año tras año. Cada número está respaldado por reporting auditable.
             </p>
           </FadeUp>
 
@@ -786,7 +809,7 @@ export default function PortfolioPage() {
             }}>
               {[
                 { num: "50M+", label: "impresiones combinadas" },
-                { num: "9", label: "casos activos" },
+                { num: "7", label: "marcas activas" },
                 { num: "5 años", label: "partnership promedio" },
                 { num: "100%", label: "uptime SLA" },
               ].map((s, i) => (
