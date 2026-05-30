@@ -615,8 +615,8 @@ export default function PortfolioPage() {
           <img src="/logo-digitals-white.png" alt="Digitals" style={{ height: "44px", width: "auto", filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.35))" }} />
         </a>
         <div style={{ display: "flex", gap: "1.6rem", alignItems: "center" }}>
-          <a href="mailto:hola@digitals.cl" data-cursor-hover style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: C.mute, textDecoration: "none", letterSpacing: "0.04em" }}>
-            hola@digitals.cl
+          <a href="mailto:contacto@digitals.cl" data-cursor-hover style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: C.mute, textDecoration: "none", letterSpacing: "0.04em" }}>
+            contacto@digitals.cl
           </a>
           <a href="/" data-cursor-hover style={{
             fontFamily: "Inter, sans-serif", fontWeight: 600,
@@ -737,17 +737,10 @@ export default function PortfolioPage() {
       {/* ── CASOS DE ÉXITO · editorial premium ──────────── */}
       <section style={{
         padding: "7rem clamp(1.5rem, 4vw, 3rem) 6rem",
-        background: `linear-gradient(180deg, ${C.bg} 0%, ${C.bgSoft} 100%)`,
+        background: C.bg,
         position: "relative", zIndex: 1,
         borderTop: `1px solid ${C.line}`,
       }}>
-        {/* Subtle background grid */}
-        <div style={{
-          position: "absolute", inset: 0, opacity: 0.04, pointerEvents: "none",
-          backgroundImage: `linear-gradient(${C.ink} 1px, transparent 1px), linear-gradient(90deg, ${C.ink} 1px, transparent 1px)`,
-          backgroundSize: "60px 60px",
-        }} />
-
         <div style={{ maxWidth: "92rem", margin: "0 auto", position: "relative" }}>
           <FadeUp>
             <div style={{ display: "flex", alignItems: "baseline", gap: "1.2rem", marginBottom: "1.2rem" }}>
@@ -772,7 +765,7 @@ export default function PortfolioPage() {
               fontSize: "1.1rem", maxWidth: "780px", marginBottom: "4.5rem",
               lineHeight: 1.6,
             }}>
-              7 marcas que confiaron en Digitals desde el día 1. <span style={{ color: C.ink, fontWeight: 600 }}>50M+ impresiones combinadas</span>, partnerships de 4-5 años, y crecimiento sostenido año tras año. Cada número está respaldado por reporting auditable.
+              <span style={{ color: C.ink, fontWeight: 600 }}>50M+ impresiones combinadas</span>, partnerships de 4-5 años, y crecimiento sostenido año tras año. Cada número está respaldado por reporting auditable.
             </p>
           </FadeUp>
 
@@ -990,153 +983,234 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* ── CLIENT LOGOS (marquee) ────────────────────── */}
-      <section
-        style={{
-          padding: "4.5rem 0",
-          borderTop: `1px solid ${C.line}`,
-          overflow: "hidden", position: "relative", zIndex: 1,
-          background: C.bg,
-        }}
-      >
-        <FadeUp>
-          <p style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "0.7rem", letterSpacing: "0.28em", textTransform: "uppercase",
-            color: C.mute, marginBottom: "2rem", textAlign: "center", fontWeight: 600,
-          }}>
-            +60 marcas confían en nosotros
-          </p>
-        </FadeUp>
-        <div style={{ display: "flex", animation: "marquee 35s linear infinite", width: "max-content" }}>
-          {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, i) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              key={`${logo}-${i}`}
-              src={`/brands/${logo}`}
-              alt=""
-              loading="lazy"
-              style={{
-                height: "32px", objectFit: "contain",
-                marginRight: "3.5rem",
-                opacity: 0.42,
-                filter: "grayscale(1) brightness(2.2)",
-              }}
-              onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* ── CAPABILITIES ──────────────────────────────── */}
+      {/* ── CLIENTS LOGOS BAND · estilo home digitals.cl ── */}
       <section style={{
-        padding: "5rem clamp(1.5rem, 4vw, 3rem)",
-        background: C.bgSoft, color: C.ink,
-        position: "relative", zIndex: 1,
+        padding: "8vh 0",
+        background: C.bg,
         borderTop: `1px solid ${C.line}`,
+        overflow: "hidden", position: "relative", zIndex: 1,
       }}>
-        <div style={{ maxWidth: "90rem", margin: "0 auto", display: "flex", gap: "3rem", flexWrap: "wrap" }}>
-          <FadeUp>
-            <div style={{ flex: "1 1 250px" }}>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.7rem", letterSpacing: "0.28em", textTransform: "uppercase", color: C.cyan, marginBottom: "1rem", fontWeight: 600 }}>
-                02 · Capabilities
-              </p>
-              <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontWeight: 400, fontSize: "clamp(2rem, 4vw, 3.5rem)", lineHeight: 0.95, letterSpacing: "0.005em", color: C.ink, margin: 0 }}>
-                Lo que hacemos
-              </h2>
-            </div>
-          </FadeUp>
-          <div style={{ flex: "2 1 400px", display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "2rem" }}>
-            {[
-              { title: "Social Media", color: C.cyan, items: ["Estrategia de contenido", "Community management", "Crecimiento orgánico"] },
-              { title: "Paid Media", color: C.gold, items: ["Meta, Google, LinkedIn, TikTok", "Tracking CAPI + GTM", "Dashboards C-Level"] },
-              { title: "B2B Executive", color: "#22c55e", items: ["Autoridad LinkedIn", "Prospección automatizada", "Reuniones C-Level"] },
-              { title: "AI & Automatización", color: "#8b5cf6", items: ["Agentes conversacionales", "RAG pipelines", "Voice AI"] },
-            ].map((c, i) => (
-              <FadeUp key={c.title} delay={i * 0.08}>
-                <div>
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.85rem" }}>
-                    <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: c.color, boxShadow: `0 0 12px ${c.color}88` }} />
-                    <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontWeight: 400, fontSize: "1.4rem", letterSpacing: "0.04em", margin: 0 }}>{c.title}</h3>
-                  </div>
-                  {c.items.map((item) => (
-                    <p key={item} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: C.mute, padding: "0.25rem 0", margin: 0 }}>{item}</p>
-                  ))}
-                </div>
-              </FadeUp>
+        <div style={{ textAlign: "center", marginBottom: "3rem", padding: "0 4vw" }}>
+          <span style={{
+            fontFamily: "Inter, sans-serif", fontWeight: 800,
+            fontSize: "0.7rem", letterSpacing: "0.32em", textTransform: "uppercase",
+            color: C.cyan, display: "block", marginBottom: "10px",
+          }}>VERIFICADO POR NUESTROS PARTNERS</span>
+          <h2 style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: "clamp(1.8rem, 3.5vw, 3rem)",
+            color: C.ink, letterSpacing: "0.06em", margin: 0, fontWeight: 400,
+          }}>+ DE 500 MARCAS HAN CONFIADO EN NOSOTROS</h2>
+        </div>
+        <div
+          className="hub-logo-carousel-container"
+          style={{
+            width: "100%", overflow: "hidden",
+            WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+            maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+          }}
+        >
+          <div
+            className="hub-logo-carousel-track"
+            style={{
+              display: "flex", alignItems: "center", width: "max-content",
+              animation: "hubMarq 60s linear infinite",
+            }}
+          >
+            {Array.from({ length: 24 }, (_, i) => i + 1).concat(Array.from({ length: 24 }, (_, i) => i + 1)).map((n, i) => (
+              <div key={`${n}-${i}`} className="hub-logo-item" style={{
+                flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center",
+                width: "280px", height: "160px", padding: "0 20px",
+              }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`/logos-blancos/${n}.png`}
+                  alt="Cliente"
+                  loading="lazy"
+                  style={{
+                    maxWidth: "220px", maxHeight: "130px", width: "auto", height: "auto",
+                    objectFit: "contain", opacity: 0.5, transition: "filter .5s, opacity .5s, transform .4s",
+                  }}
+                />
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CONTACT ──────────────────────────────────── */}
-      <section style={{
-        padding: "6rem clamp(1.5rem, 4vw, 3rem)",
-        textAlign: "center", background: C.bg,
-        position: "relative", zIndex: 1,
-        borderTop: `1px solid ${C.line}`,
+      {/* ── MASTER FOOTER · igual a digitals.cl ────────── */}
+      <footer style={{
+        position: "relative", width: "100vw", overflow: "hidden",
+        background: "#000",
+        display: "flex", flexDirection: "column", justifyContent: "space-between",
+        padding: "12vh 4vw 4vh",
+        borderTop: `1px solid ${C.line}`, zIndex: 10,
       }}>
-        <FadeUp>
-          <p style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "0.7rem", letterSpacing: "0.28em", textTransform: "uppercase",
-            color: C.cyan, marginBottom: "1.5rem", fontWeight: 600,
-          }}>03 · Contacto</p>
-          <h2 style={{
-            fontFamily: "'Bebas Neue', sans-serif", fontWeight: 400,
-            fontSize: "clamp(2.5rem, 7vw, 5rem)", letterSpacing: "0.01em", color: C.ink, margin: 0,
-          }}>
-            Creemos algo juntos
-          </h2>
-          <p style={{ marginTop: "1.2rem", color: C.mute, fontSize: "1.05rem", fontFamily: "Inter, sans-serif" }}>
-            Cada gran idea empieza con una conversación.
-          </p>
-          <a href="mailto:hola@digitals.cl" data-cursor-hover style={{
-            display: "inline-block", marginTop: "2.2rem",
-            padding: "1.05rem 3rem",
-            background: "transparent",
-            border: `1px solid ${C.gold}`,
-            borderRadius: "100px",
-            color: C.gold, textDecoration: "none",
-            fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "0.9rem",
-            letterSpacing: "0.22em", textTransform: "uppercase",
-            transition: "all 0.4s",
-          }}>hola@digitals.cl</a>
-        </FadeUp>
-        <p style={{ marginTop: "3rem", fontFamily: "Inter, sans-serif", fontSize: "0.65rem", color: "rgba(244,244,245,0.28)", letterSpacing: "0.08em" }}>
-          © {new Date().getFullYear()} Digitals · Google Premier Partner · Meta Business Partner
-        </p>
-      </section>
+        {/* huge ghost logo */}
+        <div aria-hidden style={{
+          position: "absolute", top: "40%", left: "50%", transform: "translate(-50%, -50%)",
+          fontFamily: "'Bebas Neue', sans-serif",
+          fontSize: "clamp(8rem, 25vw, 32rem)",
+          color: "#fff", opacity: 0.06, whiteSpace: "nowrap",
+          pointerEvents: "none", zIndex: 0, letterSpacing: "-1vw", userSelect: "none",
+        }}>DIGITALS</div>
 
-      {/* ── BACK TO MAIN SITE ────────────────────────── */}
-      <section style={{
-        padding: "5rem clamp(1.5rem, 4vw, 3rem)",
-        textAlign: "center", background: "#050505", color: C.ink,
-        position: "relative", zIndex: 1, borderTop: `1px solid ${C.line}`,
-      }}>
-        <FadeUp>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.65rem", letterSpacing: "0.32em", textTransform: "uppercase", color: "rgba(244,244,245,0.4)", marginBottom: "1rem", fontWeight: 600 }}>
-            — Volver al ecosistema —
-          </p>
-          <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontWeight: 400, fontSize: "clamp(1.8rem, 4vw, 3rem)", letterSpacing: "0.01em", lineHeight: 1, marginBottom: "1.4rem", color: C.ink }}>
-            Explora el sitio principal de Digitals
-          </h3>
-          <p style={{ fontFamily: "Inter, sans-serif", color: "rgba(244,244,245,0.55)", fontSize: "0.95rem", maxWidth: "32rem", margin: "0 auto 2.4rem", lineHeight: 1.6 }}>
-            Servicios, equipo, AI Labs, blog editorial y todo el ecosistema Grupo Digitals.
-          </p>
-          <a href="https://digitals.cl" data-cursor-hover style={{
-            display: "inline-flex", alignItems: "center", gap: "0.7rem",
-            padding: "1.05rem 2.6rem",
-            background: "transparent", border: `1px solid ${C.cyan}`, borderRadius: "100px",
-            color: C.ink, textDecoration: "none",
-            fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "0.9rem",
-            letterSpacing: "0.22em", textTransform: "uppercase",
-            transition: "all 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
-          }}>
-            ← Ir a digitals.cl
-          </a>
-        </FadeUp>
-      </section>
+        <div className="hub-footer-grid-4" style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr 1.4fr",
+          gap: "48px", marginBottom: "5vh",
+          position: "relative", zIndex: 5,
+        }}>
+          {/* COL 1 · Sitio */}
+          <div>
+            <h4 style={{
+              fontFamily: "Inter, sans-serif", fontWeight: 800,
+              fontSize: "0.62rem", letterSpacing: "0.24em", textTransform: "uppercase",
+              color: C.cyan, marginBottom: "18px",
+            }}>Sitio</h4>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              {[
+                { l: "Inicio", h: "https://digitals.cl" },
+                { l: "Nosotros", h: "https://digitals.cl/#about" },
+                { l: "El Equipo", h: "https://digitals.cl/#squad" },
+                { l: "Proyectos", h: "https://digitals.cl/#work" },
+                { l: "Portafolio", h: "/portfolio" },
+                { l: "Contacto", h: "https://digitals.cl/#contact" },
+              ].map(item => (
+                <li key={item.l} style={{ marginBottom: "6px" }}>
+                  <a href={item.h} data-cursor-hover style={{
+                    color: C.mute, fontSize: "0.95rem", lineHeight: 1.7, fontWeight: 500,
+                    textDecoration: "none", display: "inline-block",
+                  }}>{item.l}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* COL 2 · Servicios */}
+          <div>
+            <h4 style={{
+              fontFamily: "Inter, sans-serif", fontWeight: 800,
+              fontSize: "0.62rem", letterSpacing: "0.24em", textTransform: "uppercase",
+              color: C.cyan, marginBottom: "18px",
+            }}>Servicios</h4>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              {["Social Media", "Paid Media", "Digitals Executive", "IA & Automatización"].map(s => (
+                <li key={s} style={{ marginBottom: "6px" }}>
+                  <a href="https://digitals.cl/#services" data-cursor-hover style={{
+                    color: C.mute, fontSize: "0.95rem", lineHeight: 1.7, fontWeight: 500,
+                    textDecoration: "none", display: "inline-block",
+                  }}>{s}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* COL 3 · Ecosistema */}
+          <div>
+            <h4 style={{
+              fontFamily: "Inter, sans-serif", fontWeight: 800,
+              fontSize: "0.62rem", letterSpacing: "0.24em", textTransform: "uppercase",
+              color: C.cyan, marginBottom: "18px",
+            }}>Ecosistema</h4>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              {[
+                { l: "AI Labs", h: "https://digitals.cl/ai-labs.html" },
+                { l: "Blog · Editorial", h: "https://digitals.cl/blog.html" },
+                { l: "Portafolio", h: "/portfolio" },
+                { l: "Hapee", h: "https://hapee.ai" },
+                { l: "Zentru", h: "https://zentru.ai" },
+                { l: "Grupo Digitals", h: "https://grupodigitals.com" },
+              ].map(item => (
+                <li key={item.l} style={{ marginBottom: "6px" }}>
+                  <a href={item.h} target={item.h.startsWith("http") ? "_blank" : undefined} rel="noopener" data-cursor-hover style={{
+                    color: C.mute, fontSize: "0.95rem", lineHeight: 1.7, fontWeight: 500,
+                    textDecoration: "none", display: "inline-block",
+                  }}>{item.l}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* COL 4 · Estudio */}
+          <div>
+            <h4 style={{
+              fontFamily: "Inter, sans-serif", fontWeight: 800,
+              fontSize: "0.62rem", letterSpacing: "0.24em", textTransform: "uppercase",
+              color: C.cyan, marginBottom: "18px",
+            }}>Estudio</h4>
+            <p style={{ margin: 0, color: C.mute, fontSize: "0.9rem", lineHeight: 1.6 }}>
+              <span style={{ color: C.cyan, fontWeight: 700, fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", display: "block", marginBottom: "4px" }}>Chile</span>
+              Padre Mariano #82, Oficina 502<br/>Providencia, Santiago
+            </p>
+            <p style={{ margin: "14px 0 0", color: C.mute, fontSize: "0.9rem", lineHeight: 1.6 }}>
+              <span style={{ color: C.cyan, fontWeight: 700, fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", display: "block", marginBottom: "4px" }}>USA</span>
+              1908 Thomes Ave STE 12605<br/>Cheyenne, Wyoming, 82001
+            </p>
+            <a href="mailto:contacto@digitals.cl" data-cursor-hover style={{
+              display: "inline-block", marginTop: "14px",
+              color: C.cyan, fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "0.92rem",
+              textDecoration: "none", borderBottom: `1px solid ${C.cyan}`, paddingBottom: "2px",
+            }}>contacto@digitals.cl</a>
+            <a href="tel:+56959254546" data-cursor-hover style={{
+              display: "inline-block", marginTop: "8px",
+              color: C.gold, fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "0.92rem",
+              textDecoration: "none", borderBottom: `1px solid ${C.gold}`, paddingBottom: "2px",
+            }}>+56 9 5925 4546</a>
+            <div style={{
+              color: C.gold, fontWeight: 400, display: "block", marginTop: "18px",
+              fontFamily: "'Bebas Neue', sans-serif", fontSize: "1.4rem", letterSpacing: "0.04em",
+            }}>Let&apos;s reinvent.</div>
+          </div>
+        </div>
+
+        {/* Presencia regional */}
+        <div style={{ padding: "3vh 0", borderTop: `1px solid ${C.line}`, marginBottom: "3vh", position: "relative", zIndex: 5 }}>
+          <h4 style={{
+            color: C.mute, fontSize: "0.85rem", letterSpacing: "0.16em", textTransform: "uppercase",
+            marginBottom: "15px", fontWeight: 500,
+          }}>PRESENCIA REGIONAL</h4>
+          <div style={{ display: "flex", gap: "15px", flexWrap: "wrap" }}>
+            {["CL","AR","PE","EC","CO","MX","US"].map(code => (
+              <div key={code} style={{
+                width: "38px", height: "38px", borderRadius: "50%",
+                background: "#1a1a1a", border: `1px solid ${C.line}`,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                color: C.ink, fontFamily: "Inter, sans-serif", fontWeight: 700,
+                fontSize: "0.65rem", letterSpacing: "0.04em",
+              }}>{code}</div>
+            ))}
+          </div>
+        </div>
+
+        {/* Cierre + socials */}
+        <div style={{
+          width: "100%", borderTop: `1px solid ${C.line}`, paddingTop: "20px",
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+          position: "relative", zIndex: 5,
+          color: "#555", fontSize: "0.8rem", letterSpacing: "0.04em",
+          flexWrap: "wrap", gap: "15px",
+        }}>
+          <p style={{ margin: 0 }}>DIGITALS &copy; {new Date().getFullYear()} | AGENCIA &amp; CONSULTORA DIGITAL. TODOS LOS DERECHOS RESERVADOS.</p>
+          <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+            {[
+              { l: "IG", h: "https://www.instagram.com/agencia.digitals" },
+              { l: "in", h: "https://www.linkedin.com/company/agencia.digitals" },
+              { l: "TT", h: "https://www.tiktok.com/@agencia.digitals" },
+            ].map(s => (
+              <a key={s.l} href={s.h} target="_blank" rel="noopener" data-cursor-hover style={{
+                width: "44px", height: "44px", borderRadius: "50%",
+                background: "#000", border: "1px solid rgba(255,255,255,0.2)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                color: C.ink, textDecoration: "none",
+                fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "0.78rem",
+                letterSpacing: "0.04em",
+                transition: "border-color .3s, box-shadow .3s",
+              }} aria-label={s.l}>{s.l}</a>
+            ))}
+          </div>
+        </div>
+      </footer>
 
       {/* ── Google Fonts + Grid + Custom cursor + Marquee ── */}
       <style>{`
@@ -1149,6 +1223,34 @@ export default function PortfolioPage() {
         @keyframes marquee {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
+        }
+
+        /* CLIENTS LOGOS BAND · estilo home digitals.cl */
+        @keyframes hubMarq {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .hub-logo-carousel-container:hover .hub-logo-carousel-track { animation-play-state: paused; }
+        .hub-logo-item img:hover {
+          filter: drop-shadow(0 0 18px rgba(0,212,255,0.9)) !important;
+          opacity: 0.95 !important;
+          transform: scale(1.08);
+        }
+        @media (max-width: 768px) {
+          .hub-logo-item { width: 180px !important; height: 110px !important; padding: 0 14px !important; }
+          .hub-logo-item img { max-width: 140px !important; max-height: 80px !important; }
+        }
+        @media (max-width: 480px) {
+          .hub-logo-item { width: 140px !important; height: 90px !important; padding: 0 10px !important; }
+          .hub-logo-item img { max-width: 110px !important; max-height: 60px !important; opacity: 0.65 !important; }
+        }
+
+        /* MASTER FOOTER responsive */
+        @media (max-width: 1024px) {
+          .hub-footer-grid-4 { grid-template-columns: 1fr 1fr !important; gap: 38px !important; }
+        }
+        @media (max-width: 600px) {
+          .hub-footer-grid-4 { grid-template-columns: 1fr !important; gap: 30px !important; }
         }
 
         /* PORTFOLIO GRID · responsive */
