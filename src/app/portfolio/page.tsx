@@ -709,8 +709,9 @@ export default function PortfolioPage() {
         </motion.p>
       </motion.section>
 
-      {/* ── FILTERS (sticky) ─────────────────────────── */}
+      {/* ── FILTERS (sticky) · solo desktop ─────────── */}
       <section
+        className="portfolio-filters"
         style={{
           position: "sticky", top: "58px", zIndex: 50,
           padding: "0.85rem clamp(1.5rem, 4vw, 3rem)",
@@ -1345,6 +1346,11 @@ export default function PortfolioPage() {
         @media (max-width: 600px) {
           .portfolio-grid { grid-template-columns: 1fr; gap: 0.85rem; }
           .slot-card { grid-column: auto !important; aspect-ratio: 16 / 9 !important; }
+        }
+
+        /* Mobile: ocultar filtros sticky · liberan espacio */
+        @media (max-width: 768px) {
+          .portfolio-filters { display: none !important; }
         }
 
         /* Reduce motion · respetar accesibilidad */

@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { CustomCursor } from "@/components/CustomCursor";
 import { GrainOverlay } from "@/components/GrainOverlay";
 import { MouseTracker } from "@/components/MouseTracker";
@@ -11,8 +12,24 @@ const Scene = dynamic(() => import("@/components/Scene"), { ssr: false });
 
 export default function Home() {
   const [showCta, setShowCta] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const router = useRouter();
+
+  /* === Detectar mobile y redirigir directo al portfolio === */
+  useEffect(() => {
+    /* mobile = pointer coarse o ancho ≤ 1024 (incluye tablets verticales) */
+    const mq = window.matchMedia("(max-width: 1024px), (hover: none)");
+    if (mq.matches) {
+      setIsMobile(true);
+      router.replace("/portfolio");
+      return;
+    }
+    setReady(true);
+  }, [router]);
 
   useEffect(() => {
+    if (!ready) return;
     document.body.classList.add("hub-page");
     let raf: number;
     const tick = () => {
@@ -24,7 +41,23 @@ export default function Home() {
       document.body.classList.remove("hub-page");
       cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [ready]);
+
+  /* En mobile devolvemos un loading minimal mientras router.replace navega */
+  if (isMobile) {
+    return (
+      <div style={{
+        position: "fixed", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
+        background: "#0A0A0A", color: "#F4F4F5",
+        fontFamily: "Inter, system-ui, sans-serif", fontSize: "0.75rem",
+        letterSpacing: "0.32em", textTransform: "uppercase", opacity: 0.7
+      }}>
+        Cargando portfolio…
+      </div>
+    );
+  }
+
+  if (!ready) return null;
 
   return (
     <>
