@@ -1216,9 +1216,9 @@ export default function PortfolioPage() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
 
-        * { cursor: none !important; }
         ::selection { background: rgba(18,128,155,0.32); color: #fff; }
         div::-webkit-scrollbar { display: none; }
+        a, button, [data-cursor-hover], [role="button"] { cursor: pointer; }
 
         @keyframes marquee {
           0% { transform: translateX(0); }
