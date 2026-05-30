@@ -2,8 +2,8 @@
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { ScrollControls, Scroll, useScroll } from "@react-three/drei";
-import { EffectComposer, Bloom, Vignette, ChromaticAberration, BrightnessContrast, HueSaturation } from "@react-three/postprocessing";
-import { BlendFunction, KernelSize } from "postprocessing";
+import { EffectComposer, Bloom, Vignette, BrightnessContrast, HueSaturation } from "@react-three/postprocessing";
+import { KernelSize } from "postprocessing";
 import { useRef, useMemo, Suspense } from "react";
 import * as THREE from "three";
 import { store } from "@/lib/store";
@@ -60,10 +60,10 @@ function CameraRig() {
   const sMx = useRef(0);
   const sMy = useRef(0);
   useFrame((_, delta) => {
-    /* frame-rate independent lerp · ~85ms time-constant for scroll, ~70ms for mouse */
+    /* frame-rate independent lerp · very responsive scroll (~30ms tc) */
     const dt = Math.min(delta, 0.05);
-    const aScroll = 1 - Math.exp(-dt * 12);
-    const aMouse  = 1 - Math.exp(-dt * 14);
+    const aScroll = 1 - Math.exp(-dt * 32);
+    const aMouse  = 1 - Math.exp(-dt * 18);
     sOff.current = THREE.MathUtils.lerp(sOff.current, scroll.offset, aScroll);
     sMx.current = THREE.MathUtils.lerp(sMx.current, store.mouseX, aMouse);
     sMy.current = THREE.MathUtils.lerp(sMy.current, store.mouseY, aMouse);
@@ -244,13 +244,13 @@ export default function Scene() {
           toneMappingExposure: 1.05,
           outputColorSpace: THREE.SRGBColorSpace,
         }}
-        dpr={[1, 2]}
+        dpr={[1, 1.75]}
       >
         <Suspense fallback={<Loader />}>
           <color attach="background" args={["#0a0806"]} />
           <fog attach="fog" args={["#0a0806", 22, 50]} />
 
-          <ScrollControls pages={PAGES} damping={0.45}>
+          <ScrollControls pages={PAGES} damping={0.12}>
             <CameraRig />
             <Lighting />
             <HubObject />
@@ -259,21 +259,15 @@ export default function Scene() {
             {/* Cinematic post-processing · subtle but premium */}
             <EffectComposer multisampling={0} enableNormalPass={false}>
               <Bloom
-                intensity={0.6}
-                luminanceThreshold={0.55}
+                intensity={0.5}
+                luminanceThreshold={0.6}
                 luminanceSmoothing={0.7}
-                kernelSize={KernelSize.LARGE}
+                kernelSize={KernelSize.MEDIUM}
                 mipmapBlur
               />
-              <ChromaticAberration
-                blendFunction={BlendFunction.NORMAL}
-                offset={new THREE.Vector2(0.0006, 0.0006)}
-                radialModulation
-                modulationOffset={0.5}
-              />
-              <BrightnessContrast brightness={0.02} contrast={0.06} />
-              <HueSaturation saturation={0.12} hue={0} />
-              <Vignette eskil={false} offset={0.22} darkness={0.55} />
+              <BrightnessContrast brightness={0.015} contrast={0.05} />
+              <HueSaturation saturation={0.1} hue={0} />
+              <Vignette eskil={false} offset={0.25} darkness={0.5} />
             </EffectComposer>
 
             <Scroll html style={{ width: "100%" }}>

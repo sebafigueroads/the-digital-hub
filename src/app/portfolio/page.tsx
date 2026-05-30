@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { CustomCursor } from "@/components/CustomCursor";
 
 /* ═══════════════════════════════════════════════════════
    PALETA DIGITALS.CL · sobre fondo negro
@@ -600,6 +601,7 @@ export default function PortfolioPage() {
 
   return (
     <div style={{ background: C.bg, color: C.ink, position: "relative", minHeight: "100vh" }}>
+      <CustomCursor />
       <FloatingAtoms />
 
       {/* ── NAV ──────────────────────────────────────── */}
@@ -1218,7 +1220,12 @@ export default function PortfolioPage() {
 
         ::selection { background: rgba(18,128,155,0.32); color: #fff; }
         div::-webkit-scrollbar { display: none; }
-        a, button, [data-cursor-hover], [role="button"] { cursor: pointer; }
+        @media (hover: hover) {
+          html, body, * { cursor: none !important; }
+        }
+        @media (hover: none) {
+          a, button, [data-cursor-hover], [role="button"] { cursor: pointer; }
+        }
 
         @keyframes marquee {
           0% { transform: translateX(0); }

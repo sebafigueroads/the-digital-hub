@@ -179,7 +179,7 @@ export function HubObject() {
 
   return (
     <mesh>
-      <planeGeometry args={[W, H, 240, 134]} />
+      <planeGeometry args={[W, H, 200, 112]} />
       <shaderMaterial
         ref={matRef}
         vertexShader={vertexShader}
