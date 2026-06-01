@@ -281,43 +281,44 @@ const CASES: CaseStudy[] = [
   { id: "simplus", client: "Simplus", title: "Funnel industrial automatizado en 18+ ciudades", cat: "B2B · Automatización", kpi: "18+", kpiLabel: "ciudades cubiertas", desc: "Automatización B2B de embudos + nurturing por especialidad industrial. ROI medible en ventas desde el primer trimestre.", challenge: "Escalar ventas industriales con ROI claro y nurturing por vertical.", img: "/exitos/simplus.jpeg", colors: ["#3b82f6", "#60a5fa"], metrics: [{ num: "ROI+", label: "medible" }, { num: "18+", label: "ciudades CL" }, { num: "Industrial", label: "vertical foco" }] },
 ];
 
-/* 31 slots reales con cliente + categoría + estilo · incluye webs en producción */
+/* 31 slots reales con cliente + categoría + estilo · spans corregidos por aspect ratio real
+   wide = 16:9 horizontal · 2 cols  ·  tall = 9:16 vertical · 1 col · 2 rows  ·  (sin span) = 16:9 1 col */
 const SLOTS: Slot[] = [
   { id: "web-heliforklift",     file: "/portfolio-material/web-heliforklift.jpg",                    kind: "image", client: "Heli Forklift Chile", category: "Diseño Web · Live",  span: "wide", liveUrl: "https://heliforklift.cl/" },
   { id: "web-iphoneup",         file: "/portfolio-material/web-iphoneup.jpg",                        kind: "image", client: "iPhone Up",           category: "Diseño Web · Live",  span: "wide", liveUrl: "https://iphoneup.cl/" },
   { id: "la-oferta-hero",       file: "/portfolio-material/la-oferta-hero.mp4",                     kind: "video", client: "La Oferta",       category: "Brand · Hero",         span: "wide" },
-  { id: "la-oferta-street",     file: "/portfolio-material/la-oferta-street.mp4",                   kind: "video", client: "La Oferta",       category: "Brand · Street",       span: "wide" },
-  { id: "iphone-up-hero",       file: "/portfolio-material/iphone-up-hero.mp4",                     kind: "video", client: "iPhone Up",       category: "Brand · Hero" },
-  { id: "la-estampa-hero",      file: "/portfolio-material/la-estampa-hero.mp4",                    kind: "video", client: "La Estampa",      category: "Brand · Hero" },
+  { id: "la-oferta-street",     file: "/portfolio-material/la-oferta-street.mp4",                   kind: "video", client: "La Oferta",       category: "Brand · Street" },
+  { id: "iphone-up-hero",       file: "/portfolio-material/iphone-up-hero.mp4",                     kind: "video", client: "iPhone Up",       category: "Brand · Hero",         span: "wide" },
+  { id: "la-estampa-hero",      file: "/portfolio-material/la-estampa-hero.mp4",                    kind: "video", client: "La Estampa",      category: "Brand · Hero",         span: "wide" },
   { id: "nova-promo",           file: "/portfolio-material/nova-promo.mp4",                         kind: "video", client: "Nova Promo",      category: "Brand · Spot" },
-  { id: "telectronic-corporate",file: "/portfolio-material/telectronic-corporate.mp4",              kind: "video", client: "Telectronic",     category: "B2B · Corporate",      span: "wide" },
+  { id: "telectronic-corporate",file: "/portfolio-material/telectronic-corporate.mp4",              kind: "video", client: "Telectronic",     category: "B2B · Corporate",      span: "tall" },
   { id: "don-locker-wow",       file: "/portfolio-material/don-locker-wow-effect.mp4",              kind: "video", client: "Don Locker",      category: "Brand · Spot" },
   { id: "hotel-lodge",          file: "/portfolio-material/hotel-lodge.mp4",                        kind: "video", client: "Hotel Lodge",     category: "Brand · Spot" },
   { id: "harney-tea",           file: "/portfolio-material/harney-sons-tea.mp4",                    kind: "video", client: "Harney & Sons",   category: "Brand · Spot" },
 
-  { id: "big-boba",             file: "/portfolio-material/big-boba.mp4",                           kind: "video", client: "Big Boba",        category: "Social Media · Reel" },
-  { id: "don-locker-ig",        file: "/portfolio-material/don-locker-instagram.mp4",               kind: "video", client: "Don Locker",      category: "Social Media · Reel" },
-  { id: "iphone-up-ig",         file: "/portfolio-material/iphone-up-instagram.mp4",                kind: "video", client: "iPhone Up",       category: "Social Media · Reel" },
-  { id: "iphone-up-expect",     file: "/portfolio-material/iphone-up-expectativa.mp4",              kind: "video", client: "iPhone Up",       category: "Brand · Campaña" },
+  { id: "big-boba",             file: "/portfolio-material/big-boba.mp4",                           kind: "video", client: "Big Boba",        category: "Social Media · Reel",  span: "tall" },
+  { id: "don-locker-ig",        file: "/portfolio-material/don-locker-instagram.mp4",               kind: "video", client: "Don Locker",      category: "Social Media · Reel",  span: "tall" },
+  { id: "iphone-up-ig",         file: "/portfolio-material/iphone-up-instagram.mp4",                kind: "video", client: "iPhone Up",       category: "Social Media · Reel",  span: "tall" },
+  { id: "iphone-up-expect",     file: "/portfolio-material/iphone-up-expectativa.mp4",              kind: "video", client: "iPhone Up",       category: "Brand · Campaña",      span: "tall" },
   { id: "otra-vista",           file: "/portfolio-material/otra-vista.mp4",                         kind: "video", client: "Otra Vista",     category: "Brand · Spot" },
-  { id: "otra-vista-chile",     file: "/portfolio-material/otra-vista-chile.mp4",                   kind: "video", client: "Otra Vista",     category: "Brand · Spot" },
-  { id: "otra-vista-terraza",   file: "/portfolio-material/otra-vista-terraza.mp4",                 kind: "video", client: "Otra Vista",     category: "Brand · Spot",         span: "wide" },
-  { id: "nova-group-ig",        file: "/portfolio-material/nova-group-instagram.mp4",               kind: "video", client: "Nova Group",      category: "Social Media · Reel" },
-  { id: "nova-group-li",        file: "/portfolio-material/nova-group-linkedin-aesthetic.mp4",      kind: "video", client: "Nova Group",      category: "B2B · LinkedIn" },
+  { id: "otra-vista-chile",     file: "/portfolio-material/otra-vista-chile.mp4",                   kind: "video", client: "Otra Vista",     category: "Brand · Spot",         span: "tall" },
+  { id: "otra-vista-terraza",   file: "/portfolio-material/otra-vista-terraza.mp4",                 kind: "video", client: "Otra Vista",     category: "Brand · Spot",         span: "tall" },
+  { id: "nova-group-ig",        file: "/portfolio-material/nova-group-instagram.mp4",               kind: "video", client: "Nova Group",      category: "Social Media · Reel",  span: "tall" },
+  { id: "nova-group-li",        file: "/portfolio-material/nova-group-linkedin-aesthetic.mp4",      kind: "video", client: "Nova Group",      category: "B2B · LinkedIn",       span: "tall" },
 
-  { id: "clinica-glowing",      file: "/portfolio-material/clinica-glowing-effecting.mp4",          kind: "video", client: "Clínica Glowing", category: "After Effects · PRO Production" },
-  { id: "heli-aesthetic",       file: "/portfolio-material/heli-chile-aesthetic.mp4",               kind: "video", client: "Heli Chile",      category: "After Effects · PRO Production" },
-  { id: "heli-chile",           file: "/portfolio-material/heli-chile.mp4",                         kind: "video", client: "Heli Chile",      category: "B2B · Corporate" },
+  { id: "clinica-glowing",      file: "/portfolio-material/clinica-glowing-effecting.mp4",          kind: "video", client: "Clínica Glowing", category: "After Effects · PRO Production", span: "tall" },
+  { id: "heli-aesthetic",       file: "/portfolio-material/heli-chile-aesthetic.mp4",               kind: "video", client: "Heli Chile",      category: "After Effects · PRO Production", span: "tall" },
+  { id: "heli-chile",           file: "/portfolio-material/heli-chile.mp4",                         kind: "video", client: "Heli Chile",      category: "B2B · Corporate",       span: "tall" },
   { id: "otra-vista-4d",        file: "/portfolio-material/otra-vista-effecting-4d.mp4",            kind: "video", client: "Otra Vista",     category: "After Effects · PRO Production" },
-  { id: "otra-vista-effects",   file: "/portfolio-material/otra-vista-effects.mp4",                 kind: "video", client: "Otra Vista",     category: "After Effects · PRO Production" },
-  { id: "la-estampa-effecting", file: "/portfolio-material/la-estampa-instagram-effecting.mp4",     kind: "video", client: "La Estampa",      category: "After Effects · PRO Production" },
-  { id: "telectronic-effect",   file: "/portfolio-material/telectronic-effecting-executive.mp4",    kind: "video", client: "Telectronic",     category: "After Effects · PRO Production" },
+  { id: "otra-vista-effects",   file: "/portfolio-material/otra-vista-effects.mp4",                 kind: "video", client: "Otra Vista",     category: "After Effects · PRO Production", span: "tall" },
+  { id: "la-estampa-effecting", file: "/portfolio-material/la-estampa-instagram-effecting.mp4",     kind: "video", client: "La Estampa",      category: "After Effects · PRO Production", span: "tall" },
+  { id: "telectronic-effect",   file: "/portfolio-material/telectronic-effecting-executive.mp4",    kind: "video", client: "Telectronic",     category: "After Effects · PRO Production", span: "tall" },
 
-  { id: "develon-ads",          file: "/portfolio-material/develon-ads.mp4",                        kind: "video", client: "Develon",         category: "Performance · Ad" },
-  { id: "develon-ig",           file: "/portfolio-material/develon-instagram.mp4",                  kind: "video", client: "Develon",         category: "Social Media · Reel" },
-  { id: "develon-ig-2",         file: "/portfolio-material/develon-instagram-2.mp4",                kind: "video", client: "Develon",         category: "Social Media · Reel" },
+  { id: "develon-ads",          file: "/portfolio-material/develon-ads.mp4",                        kind: "video", client: "Develon",         category: "Performance · Ad",     span: "tall" },
+  { id: "develon-ig",           file: "/portfolio-material/develon-instagram.mp4",                  kind: "video", client: "Develon",         category: "Social Media · Reel",  span: "tall" },
+  { id: "develon-ig-2",         file: "/portfolio-material/develon-instagram-2.mp4",                kind: "video", client: "Develon",         category: "Social Media · Reel",  span: "tall" },
 
-  { id: "simplus-turbus",       file: "/portfolio-material/simplus-turbus.mp4",                     kind: "video", client: "Simplus · Turbus",category: "B2B · Corporate" },
+  { id: "simplus-turbus",       file: "/portfolio-material/simplus-turbus.mp4",                     kind: "video", client: "Simplus · Turbus",category: "B2B · Corporate",      span: "tall" },
   { id: "simplus-turbus-2",     file: "/portfolio-material/simplus-turbus-2.mp4",                   kind: "video", client: "Simplus · Turbus",category: "B2B · Corporate" },
 ];
 
@@ -369,6 +370,7 @@ function SlotCard({ slot, index, onOpen }: { slot: Slot; index: number; onOpen: 
   }, [slot.kind]);
 
   const wideSpan = slot.span === "wide";
+  const tallSpan = slot.span === "tall";
 
   return (
     <motion.div
@@ -387,11 +389,11 @@ function SlotCard({ slot, index, onOpen }: { slot: Slot; index: number; onOpen: 
       }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      className="slot-card"
+      className={`slot-card${tallSpan ? " slot-tall" : ""}${wideSpan ? " slot-wide" : ""}`}
       style={{
         position: "relative",
         gridColumn: wideSpan ? "span 2" : "auto",
-        aspectRatio: wideSpan ? "32 / 9" : "16 / 9",
+        gridRow: tallSpan ? "span 2" : "auto",
         borderRadius: "14px",
         overflow: "hidden",
         cursor: "pointer",
@@ -1364,18 +1366,32 @@ export default function PortfolioPage() {
           .hub-footer-grid-4 { grid-template-columns: 1fr !important; gap: 30px !important; }
         }
 
-        /* PORTFOLIO GRID · responsive */
+        /* PORTFOLIO GRID · masonry-style con grid-auto-flow dense
+           default → 1col × 1row · row height fijo crea formato cercano a 4:3
+           wide   → 2cols × 1row · landscape ancho
+           tall   → 1col × 2rows · formato reel vertical 9:16
+           dense empaca los huecos · orden visual estilo Pinterest */
         .portfolio-grid {
           display: grid;
           gap: 1rem;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(4, 1fr);
+          grid-auto-flow: dense;
+          grid-auto-rows: 200px;
         }
-        @media (max-width: 1100px) {
-          .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+        .slot-card { height: 100% !important; }
+        @media (max-width: 1280px) {
+          .portfolio-grid { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 210px; }
+        }
+        @media (max-width: 900px) {
+          .portfolio-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
         }
         @media (max-width: 600px) {
-          .portfolio-grid { grid-template-columns: 1fr; gap: 0.85rem; }
-          .slot-card { grid-column: auto !important; aspect-ratio: 16 / 9 !important; }
+          .portfolio-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; grid-auto-rows: 170px; }
+        }
+        @media (max-width: 420px) {
+          .portfolio-grid { grid-template-columns: 1fr; gap: 0.7rem; grid-auto-rows: 200px; }
+          .slot-card.slot-wide { grid-column: auto !important; }
+          .slot-card.slot-tall { grid-row: span 2 !important; }
         }
 
         /* Mobile: ocultar filtros sticky · liberan espacio */
