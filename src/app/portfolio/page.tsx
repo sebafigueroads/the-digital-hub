@@ -679,7 +679,7 @@ export default function PortfolioPage() {
             color: C.cyan, marginBottom: "2rem", fontWeight: 600,
           }}
         >
-          01 · Portafolio
+          Portafolio
         </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 60 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.9 }}
@@ -696,17 +696,46 @@ export default function PortfolioPage() {
           Digitals<br />
           <span style={{ color: C.gold }}>Showcase</span>
         </motion.h1>
+
         <motion.p
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55, duration: 0.8 }}
           style={{
-            marginTop: "2.5rem",
+            marginTop: "2.6rem",
             fontFamily: "Inter, sans-serif",
-            fontSize: "1.05rem", color: C.mute, maxWidth: "34rem", lineHeight: 1.7,
+            fontSize: "clamp(1.05rem, 1.35vw, 1.2rem)",
+            color: C.ink,
+            maxWidth: "42rem", lineHeight: 1.55, fontWeight: 500,
           }}
         >
-          25 piezas · video, branding, performance y AI creative.
-          <br />
-          Scrollea para explorar ↓
+          No estás viendo piezas sueltas. Cada video, cada landing, cada campaña que aparece acá <span style={{ color: C.gold, fontWeight: 700 }}>es la huella visible de una estrategia diseñada por nuestro equipo creativo de alto nivel</span> — directores de arte, copywriters, performance leads y estrategas que llevan años escalando marcas en Chile y LATAM.
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.75, duration: 0.8 }}
+          style={{
+            marginTop: "1.4rem",
+            fontFamily: "Inter, sans-serif",
+            fontSize: "1rem", color: C.mute,
+            maxWidth: "40rem", lineHeight: 1.7,
+          }}
+        >
+          Detrás de cada frame: horas de research, decisiones difíciles, iteración obsesiva — y un único objetivo: <span style={{ color: C.ink, fontWeight: 600 }}>convertir tu marca en una categoría imposible de ignorar</span>. Resultados revolucionarios para marcas que dejaron de competir y empezaron a definir su mercado.
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.0 }}
+          style={{
+            marginTop: "2.4rem",
+            fontFamily: "Inter, sans-serif",
+            fontSize: "0.78rem",
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
+            color: C.mute,
+            fontWeight: 600,
+          }}
+        >
+          25 piezas · video · branding · performance · AI creative<br />
+          <span style={{ color: C.cyan }}>↓ Scrollea para explorar</span>
         </motion.p>
       </motion.section>
 
