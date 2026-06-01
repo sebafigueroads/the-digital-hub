@@ -704,46 +704,59 @@ export default function PortfolioPage() {
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55, duration: 0.8 }}
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
           style={{
-            marginTop: "2.6rem",
+            marginTop: "2.5rem",
             fontFamily: "Inter, sans-serif",
-            fontSize: "clamp(1.05rem, 1.35vw, 1.2rem)",
-            color: C.ink,
-            maxWidth: "42rem", lineHeight: 1.55, fontWeight: 500,
+            fontSize: "1.05rem", color: C.mute, maxWidth: "34rem", lineHeight: 1.7,
           }}
         >
-          No estás viendo piezas sueltas. Cada video, cada landing, cada campaña que aparece acá <span style={{ color: C.gold, fontWeight: 700 }}>es la huella visible de una estrategia diseñada por nuestro equipo creativo de alto nivel</span> — directores de arte, copywriters, performance leads y estrategas que llevan años escalando marcas en Chile y LATAM.
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.75, duration: 0.8 }}
-          style={{
-            marginTop: "1.4rem",
-            fontFamily: "Inter, sans-serif",
-            fontSize: "1rem", color: C.mute,
-            maxWidth: "40rem", lineHeight: 1.7,
-          }}
-        >
-          Detrás de cada frame: horas de research, decisiones difíciles, iteración obsesiva — y un único objetivo: <span style={{ color: C.ink, fontWeight: 600 }}>convertir tu marca en una categoría imposible de ignorar</span>. Resultados revolucionarios para marcas que dejaron de competir y empezaron a definir su mercado.
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.0 }}
-          style={{
-            marginTop: "2.4rem",
-            fontFamily: "Inter, sans-serif",
-            fontSize: "0.78rem",
-            letterSpacing: "0.22em",
-            textTransform: "uppercase",
-            color: C.mute,
-            fontWeight: 600,
-          }}
-        >
-          25 piezas · video · branding · performance · AI creative<br />
-          <span style={{ color: C.cyan }}>↓ Scrollea para explorar</span>
+          25 piezas · video, branding, performance y AI creative.
+          <br />
+          Scrollea para explorar ↓
         </motion.p>
       </motion.section>
+
+      {/* ── MANIFESTO BAND ───── pull-quote editorial debajo del hero ── */}
+      <section
+        style={{
+          position: "relative", zIndex: 1,
+          padding: "5rem clamp(1.5rem, 4vw, 3rem) 3rem",
+          maxWidth: "90rem", margin: "0 auto",
+          borderTop: `1px solid ${C.line}`,
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          style={{ display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: "clamp(2rem, 5vw, 5rem)", alignItems: "baseline" }}
+          className="manifesto-grid"
+        >
+          <div>
+            <span style={{
+              fontFamily: "Inter, sans-serif", fontSize: "0.7rem",
+              letterSpacing: "0.32em", textTransform: "uppercase",
+              color: C.gold, fontWeight: 600, display: "inline-block", marginBottom: "1rem",
+            }}>
+              El equipo detrás
+            </span>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: C.mute, lineHeight: 1.65, maxWidth: "22rem" }}>
+              Directores de arte · copywriters · performance leads · estrategas escalando marcas en Chile y LATAM.
+            </p>
+          </div>
+          <h2 style={{
+            fontFamily: "'Bebas Neue', 'Inter', sans-serif",
+            fontWeight: 400,
+            fontSize: "clamp(1.8rem, 3.8vw, 3.6rem)",
+            lineHeight: 1.02, letterSpacing: "0.005em",
+            color: C.ink, margin: 0,
+          }}>
+            Cada pieza acá es la huella visible de una <span style={{ color: C.gold }}>estrategia de alto nivel</span> — pensada para que tu marca deje de competir y <span style={{ color: C.cyan }}>empiece a definir su mercado</span>.
+          </h2>
+        </motion.div>
+      </section>
 
       {/* ── FILTERS (sticky) · solo desktop ─────────── */}
       <section
@@ -1383,6 +1396,10 @@ export default function PortfolioPage() {
           grid-auto-rows: 200px;
         }
         .slot-card { height: 100% !important; }
+        /* Manifesto band · 1 col en mobile */
+        @media (max-width: 760px) {
+          .manifesto-grid { grid-template-columns: 1fr !important; gap: 1.4rem !important; }
+        }
         @media (max-width: 1280px) {
           .portfolio-grid { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 210px; }
         }
