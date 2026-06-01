@@ -286,6 +286,10 @@ const CASES: CaseStudy[] = [
 const SLOTS: Slot[] = [
   { id: "web-heliforklift",     file: "/portfolio-material/web-heliforklift.jpg",                    kind: "image", client: "Heli Forklift Chile", category: "Diseño Web · Live",  span: "wide", liveUrl: "https://heliforklift.cl/" },
   { id: "web-iphoneup",         file: "/portfolio-material/web-iphoneup.jpg",                        kind: "image", client: "iPhone Up",           category: "Diseño Web · Live",  span: "wide", liveUrl: "https://iphoneup.cl/" },
+  { id: "web-donlocker",        file: "/portfolio-material/web-donlocker.png",                       kind: "image", client: "Don Locker",          category: "Diseño Web · Live",  span: "wide", liveUrl: "https://donlocker.cl/" },
+  { id: "web-grupomr",          file: "/portfolio-material/web-grupomr.png",                         kind: "image", client: "MR Group",            category: "Diseño Web · Live",  span: "wide", liveUrl: "https://grupomr.cl/" },
+  { id: "web-47seguridad",      file: "/portfolio-material/web-47seguridad.png",                     kind: "image", client: "47 Seguridad",        category: "Diseño Web · Live",  span: "wide", liveUrl: "https://47seguridad.cl/" },
+  { id: "web-develon",          file: "/portfolio-material/web-develon.png",                         kind: "image", client: "Develon",             category: "Diseño Web · Live",  span: "wide", liveUrl: "https://develon-ce.cl/" },
   { id: "la-oferta-hero",       file: "/portfolio-material/la-oferta-hero.mp4",                     kind: "video", client: "La Oferta",       category: "Brand · Hero",         span: "wide" },
   { id: "la-oferta-street",     file: "/portfolio-material/la-oferta-street.mp4",                   kind: "video", client: "La Oferta",       category: "Brand · Street" },
   { id: "iphone-up-hero",       file: "/portfolio-material/iphone-up-hero.mp4",                     kind: "video", client: "iPhone Up",       category: "Brand · Hero",         span: "wide" },
