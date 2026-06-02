@@ -324,9 +324,16 @@ const SLOTS: Slot[] = [
 
   { id: "simplus-turbus",       file: "/portfolio-material/simplus-turbus.mp4",                     kind: "video", client: "Simplus · Turbus",category: "B2B · Corporate",      span: "tall" },
   { id: "simplus-turbus-2",     file: "/portfolio-material/simplus-turbus-2.mp4",                   kind: "video", client: "Simplus · Turbus",category: "B2B · Corporate" },
+  /* === NUEVOS · UGC + RRSS + Explainer · 2026-06 === */
+  { id: "ajinomoto-ugc",        file: "/portfolio-material/ajinomoto-ugc.mp4",                      kind: "video", client: "Ajinomoto",       category: "Social Media · UGC",       span: "tall" },
+  { id: "calyptra-founder-ugc", file: "/portfolio-material/calyptra-founder-ugc.mp4",               kind: "video", client: "Calyptra",        category: "Social Media · UGC",       span: "tall" },
+  { id: "calyptra-rrss",        file: "/portfolio-material/calyptra-rrss.mp4",                      kind: "video", client: "Calyptra",        category: "Social Media · Reel",      span: "tall" },
+  { id: "develon-rrss",         file: "/portfolio-material/develon-rrss.mp4",                       kind: "video", client: "Develon",         category: "Social Media · Reel",      span: "tall" },
+  { id: "esis-explainer",       file: "/portfolio-material/esis-explainer.mp4",                     kind: "video", client: "ESIS",            category: "Social Media · Explainer", span: "tall" },
+  { id: "integrakin-ugc",       file: "/portfolio-material/integrakin-ugc.mp4",                     kind: "video", client: "Integrakin",      category: "Social Media · UGC",       span: "tall" },
 ];
 
-const CATEGORIES = ["Todos", "Diseño Web · Live", "Brand · Hero", "Brand · Spot", "Brand · Street", "Brand · Campaña", "Social Media · Reel", "After Effects · PRO Production", "Performance · Ad", "B2B · Corporate", "B2B · LinkedIn"];
+const CATEGORIES = ["Todos", "Diseño Web · Live", "Brand · Hero", "Brand · Spot", "Brand · Street", "Brand · Campaña", "Social Media · Reel", "Social Media · UGC", "Social Media · Explainer", "After Effects · PRO Production", "Performance · Ad", "B2B · Corporate", "B2B · LinkedIn"];
 
 const CLIENT_LOGOS = [
   "burger_king.png", "clinica_indisa.png", "logo-chery.png", "mundomed.png",
