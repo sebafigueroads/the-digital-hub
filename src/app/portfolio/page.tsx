@@ -300,6 +300,13 @@ const SLOTS: Slot[] = [
   { id: "hotel-lodge",          file: "/portfolio-material/hotel-lodge.mp4",                        kind: "video", client: "Hotel Lodge",     category: "Brand · Spot" },
   { id: "harney-tea",           file: "/portfolio-material/harney-sons-tea.mp4",                    kind: "video", client: "Harney & Sons",   category: "Brand · Spot" },
 
+  /* === Reels recientes 2026 · agregados Jun 2026 === */
+  { id: "heli-electric-2026",   file: "/portfolio-material/heli-electric.mp4",                      kind: "video", client: "Heli Forklift Chile", category: "B2B · Sostenibilidad" },
+  { id: "heli-exponor-2026",    file: "/portfolio-material/exponor-heli.mp4",                       kind: "video", client: "Heli Forklift Chile", category: "B2B · EXPONOR 2026" },
+  { id: "hapee-ia-2026",        file: "/portfolio-material/hapee-ia.mp4",                           kind: "video", client: "Hapee · SaaS GHL",    category: "AI · Automatización",  span: "tall" },
+  { id: "dellanatura-mall-2026",file: "/portfolio-material/dellanatura-mall.mp4",                   kind: "video", client: "Dellanatura",         category: "Social Media · Reel",  span: "tall" },
+  { id: "digitals-higgsfield",  file: "/portfolio-material/higgsfield-test.mp4",                    kind: "video", client: "Digitals · BTS",      category: "AI · Creative",        span: "tall" },
+
   { id: "big-boba",             file: "/portfolio-material/big-boba.mp4",                           kind: "video", client: "Big Boba",        category: "Social Media · Reel",  span: "tall" },
   { id: "don-locker-ig",        file: "/portfolio-material/don-locker-instagram.mp4",               kind: "video", client: "Don Locker",      category: "Social Media · Reel",  span: "tall" },
   { id: "iphone-up-ig",         file: "/portfolio-material/iphone-up-instagram.mp4",                kind: "video", client: "iPhone Up",       category: "Social Media · Reel",  span: "tall" },
