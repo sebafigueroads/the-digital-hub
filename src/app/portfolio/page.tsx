@@ -727,7 +727,7 @@ export default function PortfolioPage() {
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
           style={{
             marginTop: "2.5rem",
-            fontFamily: "Inter, sans-serif",
+            fontFamily: "'Montserrat', sans-serif", fontWeight: 400, letterSpacing: "0.01em",
             fontSize: "1.05rem", color: C.mute, maxWidth: "34rem", lineHeight: 1.7,
           }}
         >
