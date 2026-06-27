@@ -725,7 +725,7 @@ export default function PortfolioPage() {
             fontSize: "1.05rem", color: C.mute, maxWidth: "34rem", lineHeight: 1.7,
           }}
         >
-          25 piezas · video, branding, performance y AI creative.
+          Reels que paran el scroll, spots de marca, ads que venden, demos B2B y creatividad con IA. El trabajo real que sale del Hub — sin stock, sin relleno.
           <br />
           Scrollea para explorar ↓
         </motion.p>
