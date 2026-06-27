@@ -338,6 +338,12 @@ const SLOTS: Slot[] = [
   { id: "develon-rrss",         file: "/portfolio-material/develon-rrss.mp4",                       kind: "video", client: "Develon",         category: "Social Media · Reel",      span: "tall" },
   { id: "esis-explainer",       file: "/portfolio-material/esis-explainer.mp4",                     kind: "video", client: "ESIS",            category: "Social Media · Explainer", span: "tall" },
   { id: "integrakin-ugc",       file: "/portfolio-material/integrakin-ugc.mp4",                     kind: "video", client: "Integrakin",      category: "Social Media · UGC",       span: "tall" },
+
+  /* === NUEVOS · 2026-06 (4 reels) === */
+  { id: "ajinomoto-animado",    file: "/portfolio-material/ajinomoto-animado.mp4",                  kind: "video", client: "Ajinomoto",      category: "After Effects · PRO Production", span: "tall" },
+  { id: "heli-exponor-pro",     file: "/portfolio-material/heli-exponor-pro.mp4",                   kind: "video", client: "Heli Chile",     category: "B2B · Corporate",          span: "tall" },
+  { id: "iphone-up-showcase",   file: "/portfolio-material/iphone-up-showcase.mp4",                 kind: "video", client: "iPhone Up",      category: "Brand · Spot",             span: "tall" },
+  { id: "preomed-exponor",      file: "/portfolio-material/preomed-exponor.mp4",                    kind: "video", client: "Preomed",        category: "B2B · Corporate",          span: "tall" },
 ];
 
 const CATEGORIES = ["Todos", "Diseño Web · Live", "Brand · Hero", "Brand · Spot", "Brand · Street", "Brand · Campaña", "Social Media · Reel", "Social Media · UGC", "Social Media · Explainer", "After Effects · PRO Production", "Performance · Ad", "B2B · Corporate", "B2B · LinkedIn"];
@@ -725,7 +731,7 @@ export default function PortfolioPage() {
             fontSize: "1.05rem", color: C.mute, maxWidth: "34rem", lineHeight: 1.7,
           }}
         >
-          Reels que paran el scroll, spots de marca, ads que venden, demos B2B y creatividad con IA. El trabajo real que sale del Hub — sin stock, sin relleno.
+          Contenido que realmente causa impacto, webs de última generación y campañas con resultados — ganadoras de premios.
           <br />
           Scrollea para explorar ↓
         </motion.p>
