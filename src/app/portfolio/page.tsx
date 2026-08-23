@@ -315,7 +315,7 @@ const SLOTS: Slot[] = [
   { id: "otra-vista-chile",     file: "/portfolio-material/otra-vista-chile.mp4",                   kind: "video", client: "Otra Vista",     category: "Brand · Spot",         span: "tall" },
   { id: "otra-vista-terraza",   file: "/portfolio-material/otra-vista-terraza.mp4",                 kind: "video", client: "Otra Vista",     category: "Brand · Spot",         span: "tall" },
   { id: "nova-group-ig",        file: "/portfolio-material/nova-group-instagram.mp4",               kind: "video", client: "Nova Group",      category: "Social Media · Reel",  span: "tall" },
-  { id: "nova-group-li",        file: "/portfolio-material/nova-group-linkedin-aesthetic.mp4",      kind: "video", client: "Nova Group",      category: "B2B · LinkedIn",       span: "tall" },
+  { id: "nova-group-li",        file: "/portfolio-material/nova-group-linkedin-aesthetic.mp4",      kind: "video", client: "Heli Fork Lift",  category: "B2B · LinkedIn",       span: "tall" },
 
   { id: "clinica-glowing",      file: "/portfolio-material/clinica-glowing-effecting.mp4",          kind: "video", client: "Clínica Glowing", category: "After Effects · PRO Production", span: "tall" },
   { id: "heli-aesthetic",       file: "/portfolio-material/heli-chile-aesthetic.mp4",               kind: "video", client: "Heli Chile",      category: "After Effects · PRO Production", span: "tall" },
