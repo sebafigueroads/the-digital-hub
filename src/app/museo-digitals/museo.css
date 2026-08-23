@@ -814,3 +814,35 @@
   .hub-nav-link.hide-mobile {
     display: none;
   }}
+/* ── Tokens del design system dorado (el globals real usa otra paleta) ──
+      Solo cargan en esta ruta; la navegación fuera es full-page-load. */
+:root {
+  --color-bg: #0a0a0a;
+  --color-bg-soft: #111114;
+  --color-ink: #f4f4f5;
+  --color-mute: rgba(244, 244, 245, 0.55);
+  --color-line: rgba(244, 244, 245, 0.1);
+  --color-gold: #e5bb55;
+  --color-gold-soft: rgba(229, 187, 85, 0.16);
+  --font-display: "Bebas Neue", "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+/* ── Tipografía display + kicker (del design system del monorepo) ── */
+.display-xxl {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3.4rem, 11.5vw, 10.5rem);
+  line-height: 0.88;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+}
+
+.kicker {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
