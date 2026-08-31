@@ -675,13 +675,13 @@ export default function PortfolioPage() {
           <a href="mailto:contacto@digitals.cl" data-cursor-hover style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: C.mute, textDecoration: "none", letterSpacing: "0.04em" }}>
             contacto@digitals.cl
           </a>
-          <a href="/" data-cursor-hover style={{
+          <a href="/museo-digitals" data-cursor-hover style={{
             fontFamily: "Inter, sans-serif", fontWeight: 600,
             fontSize: "0.7rem", padding: "0.55rem 1.2rem",
             background: "transparent", border: `1px solid ${C.cyan}`,
             borderRadius: "100px", color: C.ink, textDecoration: "none",
             letterSpacing: "0.18em", textTransform: "uppercase",
-          }}>Hub 3D</a>
+          }}>Ver el museo</a>
         </div>
       </nav>
 

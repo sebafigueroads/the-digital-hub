@@ -1,0 +1,195 @@
+/* Bifurcación Portafolio / Museo. Autocontenida: globals.css de este repo
+   define otra paleta y no trae la tipografía display, así que los tokens
+   viven aquí y no dependen de nada externo. */
+
+.elegir {
+  --bg: #0a0a0a;
+  --card: #121212;
+  --oro: #e5bb55;
+  --tinta: #f4f4f5;
+  --mute: #9a958c;
+  --linea: rgba(255, 255, 255, 0.12);
+
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--bg);
+  color: var(--tinta);
+  font-family: Inter, -apple-system, system-ui, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  padding: 0 clamp(20px, 4vw, 54px);
+}
+
+.elegir a { color: inherit; text-decoration: none; }
+.elegir img { max-width: 100%; display: block; }
+
+/* ── cabecera ── */
+.elegir-hd {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--linea);
+}
+.elegir-marca img { height: 40px; width: auto; }
+.elegir-volver {
+  margin-left: auto;
+  font-family: "Space Grotesk", ui-monospace, monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mute);
+  transition: color 0.25s;
+}
+.elegir-volver:hover { color: var(--oro); }
+
+/* ── intro ── */
+.elegir-intro { padding: clamp(40px, 7vw, 86px) 0 clamp(28px, 4vw, 46px); }
+.elegir-kicker {
+  font-family: "Space Grotesk", ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--oro);
+  margin: 0 0 18px;
+}
+.elegir-h1 {
+  margin: 0;
+  font-family: "Bebas Neue", Impact, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  line-height: 0.9;
+  font-size: clamp(3rem, 11vw, 8.5rem);
+  text-transform: uppercase;
+}
+.elegir-h1 em { font-style: normal; color: var(--oro); }
+.elegir-sub {
+  margin: 22px 0 0;
+  max-width: 46ch;
+  font-size: clamp(1rem, 2.3vw, 1.14rem);
+  color: var(--mute);
+}
+
+/* ── las dos opciones ── */
+.elegir-g {
+  display: grid;
+  gap: 18px;
+  padding-bottom: clamp(36px, 5vw, 64px);
+}
+@media (min-width: 900px) {
+  .elegir-g { grid-template-columns: 1fr 1fr; gap: 22px; }
+}
+
+.op { min-width: 0; }
+.op-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--card);
+  border: 1px solid var(--linea);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1),
+    border-color 0.35s;
+}
+.op-link:hover,
+.op-link:focus-visible { transform: translateY(-5px); border-color: var(--oro); }
+.op-link:focus-visible { outline: 3px solid var(--oro); outline-offset: 3px; }
+
+.op-foto {
+  display: block;
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+}
+.op-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.op-link:hover .op-foto img { transform: scale(1.04); }
+.op-foto::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0) 40%, rgba(10, 10, 10, 0.72) 100%);
+}
+
+.op-cuerpo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(22px, 3vw, 32px);
+  flex: 1;
+}
+.op-n {
+  font-family: "Space Grotesk", ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--oro);
+}
+.op-tit {
+  font-family: "Bebas Neue", Impact, sans-serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 4.6vw, 3.1rem);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+.op-baj { color: var(--mute); font-size: 0.97rem; }
+.op-metas { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 2px; }
+.op-meta {
+  font-family: "Space Grotesk", ui-monospace, monospace;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mute);
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  padding: 0.36rem 0.7rem;
+}
+.op-cta {
+  margin-top: auto;
+  padding-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--oro);
+}
+.op-cta i { font-style: normal; transition: transform 0.3s; }
+.op-link:hover .op-cta i { transform: translateX(5px); }
+
+/* ── pie ── */
+.elegir-pie {
+  margin-top: auto;
+  border-top: 1px solid var(--linea);
+  padding: 22px 0 34px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  justify-content: space-between;
+  font-family: "Space Grotesk", ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.elegir-pie a { color: var(--oro); }
+
+@media (prefers-reduced-motion: reduce) {
+  .elegir *, .elegir *::before, .elegir *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+  .op-link:hover { transform: none; }
+  .op-link:hover .op-foto img { transform: none; }
+}

@@ -19,7 +19,7 @@
    ═══════════════════════════════════════════════════════════════ */
 
 import { Canvas, useFrame, useThree, useLoader } from "@react-three/fiber";
-import { ScrollControls, Scroll, useScroll, Html, useProgress } from "@react-three/drei";
+import { ScrollControls, Scroll, useScroll, useProgress } from "@react-three/drei";
 import { useRef, useMemo, useEffect, useState, Suspense } from "react";
 import * as THREE from "three";
 import { store } from "@/lib/store";
@@ -1025,19 +1025,35 @@ function OverlaySections() {
 }
 
 /* ═══════════════ LOADER CON % ═══════════════ */
+/* Vive FUERA del Canvas. Antes era un <Html fullscreen> de drei, que monta su
+   propia raíz de React sobre un contenedor del DOM; con el doble render de
+   StrictMode esa raíz se creaba dos veces sobre el mismo nodo y la consola
+   quedaba con un error permanente ("createRoot() on a container that has
+   already been passed to createRoot()"). No hacía falta estar dentro de la
+   escena: es un overlay de DOM sin nada 3D, y `useProgress` de drei lee el
+   gestor de carga global, así que funciona igual afuera. De paso se ahorra el
+   puente 3D→DOM en el momento de arranque, que es cuando menos sobra. */
 function V3Loader() {
-  const { progress } = useProgress();
+  const { progress, active } = useProgress();
+  /* Solo la PRIMERA carga. `useProgress` se vuelve a activar cada vez que
+     entran texturas nuevas —y en este museo entran a medida que uno avanza por
+     las salas—, así que sin este pestillo el panel negro a pantalla completa
+     reaparecía en mitad del recorrido y tapaba la sala que se estaba mirando.
+     Antes no pasaba porque el loader vivía dentro de <Suspense>, que solo
+     suspende al montar; al sacarlo de ahí (para no montar una segunda raíz de
+     React) había que reponer esa condición a mano. */
+  const listo = useRef(false);
+  if (!active && progress >= 100) listo.current = true;
+  if (listo.current) return null;
   return (
-    <Html fullscreen>
-      <div className="v3-loader">
+    <div className="v3-loader" aria-live="polite" aria-busy="true">
         <p className="v3-loader-brand">Digitals</p>
         <div className="v3-loader-track">
           <div className="v3-loader-fill" style={{ width: `${progress}%` }} />
         </div>
         <p className="v3-loader-pct">{progress.toFixed(0)}%</p>
         <p className="v3-loader-hint">Construyendo el túnel…</p>
-      </div>
-    </Html>
+    </div>
   );
 }
 
@@ -1049,6 +1065,7 @@ export default function TunnelScene({ mobile }: { mobile: boolean }) {
 
   return (
     <div style={{ position: "fixed", inset: 0, zIndex: 1 }}>
+      <V3Loader />
       <Canvas
         camera={{ fov: 58, near: 0.1, far: 440, position: [0, CAM_Y, 8] }}
         gl={{ antialias: !mobile, alpha: false, powerPreference: "high-performance" }}
@@ -1056,7 +1073,7 @@ export default function TunnelScene({ mobile }: { mobile: boolean }) {
       >
         <color attach="background" args={[FOG_COLOR]} />
         <fog attach="fog" args={[FOG_COLOR, 3, 30]} />
-        <Suspense fallback={<V3Loader />}>
+        <Suspense fallback={null}>
           <ScrollControls pages={PAGES} damping={0.28}>
             <CameraRig mobile={mobile} />
 
